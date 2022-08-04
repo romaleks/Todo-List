@@ -6,6 +6,8 @@ module.exports = {
    entry: path.resolve(__dirname, 'src/index.js'),
    output: {
       path: path.resolve(__dirname, 'dist'),
+      clean: true,
+      assetModuleFilename: '[name][ext]',
    },
    devtool: 'inline-source-map',
    devServer: {
@@ -23,6 +25,10 @@ module.exports = {
          {
             test: /\.scss$/,
             use: ['style-loader', 'css-loader', 'sass-loader'],
+         },
+         {
+            test: /\.(png|svg|jpg|jpeg|gif)$/i,
+            type: 'asset/resource',
          },
       ],
    },
