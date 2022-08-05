@@ -57,29 +57,45 @@
          </div>
       </div>
       <main class="content">
-         <div class="header">
-            <div id="menu_icon" class="header__icon btn"><img src="./images/menu.svg" alt="Menu" class="icon"></div>
-            <div class="header__title">🛒 Grocery list</div>
-            <div class="header__icon btn"><img src="./images/settings.svg" alt="Settings" class="icon"></div>
-            <div class="header__icon btn"><img src="./images/options.svg" alt="Options" class="icon"></div>
-         </div>
-         <div class="add-task">
-            <button class="add-task__btn btn">
-               <img src="./images/add.svg" alt="Add" class="icon">
-            </button>
-            <form class="add-task__input">
-               <input type="text" id="task_title" name="task_title" placeholder=" " required>
-               <label for="task_title">Add task</label>
-            </form>
-         </div>
-         <div class="tasks">
-            <div class="tasks__task task">
-               <button class="task__checkbox"></button>
-               <div class="task__title">Buy vegetables</div>
-               <div class="task__date">27 May</div>
-               <button class="task__del-btn">
-                  <img src="./images/delete.svg" alt="Delete" class="icon">
+         <div class="container">
+            <div class="header">
+               <div id="menu_icon" class="header__icon btn"><img src="./images/menu.svg" alt="Menu" class="icon"></div>
+               <div class="header__title">🛒 Grocery list</div>
+               <div class="header__icon btn"><img src="./images/settings.svg" alt="Settings" class="icon"></div>
+               <div class="header__icon btn"><img src="./images/options.svg" alt="Options" class="icon"></div>
+            </div>
+            <div class="add-task">
+               <button class="add-task__btn btn">
+                  <img src="./images/add.svg" alt="Add" class="icon">
                </button>
+               <form class="add-task__input">
+                  <input type="text" id="task_title" name="task_title" placeholder=" " required>
+                  <label for="task_title">Add task</label>
+               </form>
+            </div>
+            <div class="tasks">
+               <div class="tasks__task task">
+                  <div class="task__checkbox"></div>
+                  <div class="task__title">Buy vegetables</div>
+                  <div class="task__date">27 May</div>
+                  <div id="edit-btn" class="task__icon">
+                     <img src="./images/edit.svg" alt="Edit" class="icon">
+                  </div>
+                  <div id="del-btn" class="task__icon">
+                     <img src="./images/delete.svg" alt="Delete" class="icon">
+                  </div>
+               </div>
+               <div class="tasks__task task">
+                  <div class="task__checkbox"></div>
+                  <div class="task__title">Buy fruits</div>
+                  <div class="task__date">27 May</div>
+                  <div id="edit-btn" class="task__icon">
+                     <img src="./images/edit.svg" alt="Edit" class="icon">
+                  </div>
+                  <div id="del-btn" class="task__icon">
+                     <img src="./images/delete.svg" alt="Delete" class="icon">
+                  </div>
+               </div>
             </div>
          </div>
       </main>
