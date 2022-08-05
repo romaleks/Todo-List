@@ -10,13 +10,121 @@ $font-inactive-color: #c0c0c0;
 $font-color: #000;
 
 $base-font: 'Manrope', sans-serif;
-
+// General
 body {
    margin: 0;
    min-height: 100vh;
    font-family: $base-font;
 }
-
+.wrapper {
+	height: 100vh;
+   display: grid;
+	grid-template-columns: auto auto 1fr;
+}
 .icon {
    width: 30px;
+}
+// Left bar
+.left-bar {
+	padding: 1rem 0.5rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background: $base-color;
+		&__profile {
+			width: 35px;
+			height: 35px;
+			background: $active-color;
+			border-radius: 5px;
+			margin: 0 0 2rem 0;
+			cursor: pointer;
+		}
+
+		&__icons {
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+			&_b {
+				flex: 1;
+			}
+			.icon {
+				filter: invert(97%) sepia(0%) saturate(1212%) hue-rotate(218deg) brightness(113%) contrast(87%);
+				cursor: pointer;
+				&:hover,
+				&.active {
+					filter: invert(96%) sepia(100%) saturate(0%) hue-rotate(98deg) brightness(103%) contrast(107%);
+				}
+			}
+		}
+}
+.menu {
+
+		&__sections {
+		}
+
+		&__title {
+		}
+
+		&__projects {
+		}
+
+		&__button {
+		}
+}
+.section {
+
+		&__icon {
+		}
+
+		&__title {
+		}
+}
+.button {
+
+		&__icon {
+		}
+
+		&__text {
+		}
+}
+.content {
+}
+.header {
+
+		&__menu-icon {
+		}
+
+		&__title {
+		}
+
+		&__icon {
+		}
+}
+.tasks {
+
+		&__add-task {
+		}
+
+		&__add-btn {
+		}
+
+		&__add-input {
+		}
+
+		&__task {
+		}
+}
+.task {
+
+		&__checkbox {
+		}
+
+		&__title {
+		}
+
+		&__date {
+		}
+
+		&__del-btn {
+		}
 }
