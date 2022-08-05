@@ -22,7 +22,7 @@
             <img src="./images/help.svg" alt="Help" class="icon">
          </div>
       </div>
-      <div class="menu inactive">
+      <div class="menu">
          <div class="menu__sections">
             <div class="section active">
                <div class="section__icon"><img src="./images/inbox.svg" alt="Inbox" class="icon"></div>
@@ -51,28 +51,28 @@
                <div class="section__title">📚 Homework</div>
             </div>
          </div>
-         <div id="add_btn" class="section">
+         <div id="add_btn" class="section btn">
             <div class="section__icon"><img src="./images/add.svg" class="icon"></div>
             <div class="section__title">Add Project</div>
          </div>
       </div>
       <main class="content">
          <div class="header">
-            <div class="header__menu-icon"><img src="./images/menu.svg" alt="Menu" class="icon"></div>
+            <div id="menu_icon" class="header__icon btn"><img src="./images/menu.svg" alt="Menu" class="icon"></div>
             <div class="header__title">🛒 Grocery list</div>
-            <div class="header__icon"><img src="./images/settings.svg" alt="Settings" class="icon"></div>
-            <div class="header__icon"><img src="./images/options.svg" alt="Options" class="icon"></div>
+            <div class="header__icon btn"><img src="./images/settings.svg" alt="Settings" class="icon"></div>
+            <div class="header__icon btn"><img src="./images/options.svg" alt="Options" class="icon"></div>
+         </div>
+         <div class="add-task">
+            <button class="add-task__btn btn">
+               <img src="./images/add.svg" alt="Add" class="icon">
+            </button>
+            <form class="add-task__input">
+               <input type="text" id="task_title" name="task_title" placeholder=" " required>
+               <label for="task_title">Add task</label>
+            </form>
          </div>
          <div class="tasks">
-            <div class="tasks__add-task">
-               <button class="tasks__add-btn">
-                  <img src="./images/add.svg" alt="Add" class="icon">
-               </button>
-               <form class="tasks__add-input">
-                  <input type="text" id="task_title" name="task_title">
-                  <label for="task_title">Add task</label>
-               </form>
-            </div>
             <div class="tasks__task task">
                <button class="task__checkbox"></button>
                <div class="task__title">Buy vegetables</div>
