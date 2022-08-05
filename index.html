@@ -12,50 +12,59 @@
    <div class="wrapper">
       <div class="left-bar">
          <div class="left-bar__profile"></div>
-         <div class="left-bar__icons left-bar__icons_b"></div>
-         <div class="left-bar__icons"></div>
+         <div class="left-bar__icons left-bar__icons_b">
+            <img src="./images/tasks.svg" alt="Tasks">
+            <img src="./images/notify.svg" alt="Notifications">
+            <img src="./images/search.svg" alt="Search">
+         </div>
+         <div class="left-bar__icons">
+            <img src="./images/theme.svg" alt="Chnage theme">
+            <img src="./images/help.svg" alt="Help">
+         </div>
       </div>
       <div class="menu">
          <div class="menu__sections">
             <div class="section">
-               <div class="section__icon"></div>
+               <div class="section__icon"><img src="../dist/images/inbox.svg" alt="Inbox" class="icon"></div>
                <div class="section__title">Inbox</div>
             </div>
             <div class="section">
-               <div class="section__icon"></div>
+               <div class="section__icon"><img src="../dist/images/today.svg" alt="Today" class="icon"></div>
                <div class="section__title">Today</div>
             </div>
             <div class="section">
-               <div class="section__icon"></div>
+               <div class="section__icon"><img src="../dist/images/upcomming.svg" alt="Upcomming" class="icon"></div>
                <div class="section__title">Upcoming</div>
             </div>
          </div>
          <div class="menu__title">Projects</div>
          <div class="menu__projects">
             <div class="section">
-               <div class="section__icon"></div>
+               <div class="section__icon"><img src="../dist/images/project.svg" class="icon"></div>
                <div class="section__title">🛒 Grocery list</div>
             </div>
             <div class="section">
-               <div class="section__icon"></div>
+               <div class="section__icon"><img src="../dist/images/project.svg" class="icon"></div>
                <div class="section__title">📚 Homework</div>
             </div>
          </div>
          <div class="menu__button button">
-            <div class="button__icon"></div>
+            <div class="button__icon"><img src="../dist/images/add.svg" class="icon"></div>
             <div class="button__text">Add Project</div>
          </div>
       </div>
       <main class="content">
          <div class="header">
-            <div class="header__menu-icon"></div>
+            <div class="header__menu-icon"><img src="../dist/images/menu.svg" alt="Menu" class="icon"></div>
             <div class="header__title">🛒 Grocery list</div>
-            <div class="header__icon"></div>
-            <div class="header__icon"></div>
+            <div class="header__icon"><img src="../dist/images/settings.svg" alt="Settings" class="icon"></div>
+            <div class="header__icon"><img src="../dist/images/options.svg" alt="Options" class="icon"></div>
          </div>
          <div class="tasks">
             <div class="tasks__add-task">
-               <button class="tasks__add-btn"></button>
+               <button class="tasks__add-btn">
+                  <img src="../dist/images/add.svg" alt="Add" class="icon">
+               </button>
                <form class="tasks__add-input">
                   <input type="text" id="task_title" name="task_title">
                   <label for="task_title">Add task</label>
@@ -65,7 +74,9 @@
                <button class="task__checkbox"></button>
                <div class="task__title">Buy vegetables</div>
                <div class="task__date">27 May</div>
-               <button class="task__del-btn"></button>
+               <button class="task__del-btn">
+                  <img src="../dist/images/delete.svg" alt="Delete" class="icon">
+               </button>
             </div>
          </div>
       </main>
