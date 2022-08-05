@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;700&display=swap');
 
 $base-color: #00a6fb;
-$hover-color: #cae9ff;
-$active-color: #a3cef1;
+$inter-color: #e5e5e5;
+$hover-color: #eff8fe;
+$active-color: #dfeef8;
 $icon-active-color: #fff;
 $icon-inactive-color: #ffffff78;
 $font-active-color: #00a6fb;
-$font-inactive-color: #c0c0c0;
 $font-color: #000;
 
 $base-font: 'Manrope', sans-serif;
@@ -57,37 +57,69 @@ body {
 			}
 		}
 }
+// Menu
 .menu {
-
+	padding: 1rem 0.5rem;
+	min-width: 250px;
+	display: flex;
+	flex-direction: column;
+	border-right: 1px solid $inter-color;
 		&__sections {
+			margin: 0 0 1.4rem 0;
+			position: relative;
+			&:after {
+				content: '';
+				position: absolute;
+				left: 0;
+				bottom: -0.7rem;
+				width: 100%;
+				height: 1px;
+				background: $inter-color;
+			}
 		}
 
 		&__title {
+			font-weight: 700;
 		}
 
 		&__projects {
-		}
-
-		&__button {
+			flex: 1;
 		}
 }
 .section {
-
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	padding: 0.5rem;
+	border-radius: 5px;
+	cursor: pointer;
+	&:hover {
+		background: $hover-color;
+	}
+	&.active {
+		background: $active-color;
+	}
+	&#add_btn:active {
+		background: $active-color;
+	}
 		&__icon {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			.triangle {
+				transform: rotate(90deg);
+			}
 		}
 
 		&__title {
+			
 		}
-}
-.button {
-
-		&__icon {
-		}
-
-		&__text {
-		}
+	.icon {
+		width: 25px;
+	}
 }
 .content {
+	padding: 1rem;
 }
 .header {
 
