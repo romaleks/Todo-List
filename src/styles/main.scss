@@ -11,6 +11,13 @@ $font-color: #000;
 
 $base-font: 'Manrope', sans-serif;
 // General
+::-webkit-scrollbar {
+	width: 3px;
+}
+::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background: $base-color;
+}
 body {
    margin: 0;
    min-height: 100vh;
@@ -19,11 +26,15 @@ body {
 .wrapper {
 	height: 100vh;
    display: grid;
-	grid-template-columns: auto auto 1fr;
+	grid-template-columns: 50px auto 1fr;
+	grid-template-rows: 100vh;
 }
 .container {
 	max-width: 1100px;
+	max-height: calc(100vh - 2rem);
 	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
 }
 .icon {
    width: 30px;
@@ -41,7 +52,6 @@ body {
 }
 // Left bar
 .left-bar {
-	position: sticky;
 	padding: 1rem 0.5rem;
 	display: flex;
 	flex-direction: column;
@@ -75,6 +85,7 @@ body {
 }
 // Menu
 .menu {
+	grid-column-start: 2;
 	padding: 1rem 0.5rem;
 	min-width: 250px;
 	display: flex;
@@ -209,6 +220,15 @@ body {
 	}
 }
 .tasks {
+	flex: 1;
+	overflow: auto;
+	&::-webkit-scrollbar-thumb {
+		visibility: hidden;
+		transition: all 0.5s ease;
+	}
+	&:hover::-webkit-scrollbar-thumb {
+		visibility: visible;
+	}
 		&__task {
 			margin: 0 0 0.5rem 0;
 		}
@@ -247,6 +267,13 @@ body {
 			cursor: pointer;
 			img {
 				width: 20px;
+				filter: invert(80%) sepia(0%) saturate(1554%) hue-rotate(222deg) brightness(87%) contrast(86%);
+				&:hover {
+					filter: invert(47%) sepia(8%) saturate(29%) hue-rotate(322deg) brightness(95%) contrast(84%);
+				}
+			}
+			&.del img {
+				filter: none;
 			}
 		}
 }
