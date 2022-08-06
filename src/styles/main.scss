@@ -6,7 +6,7 @@ $hover-color: #eff8fe;
 $active-color: #dfeef8;
 $icon-active-color: #fff;
 $icon-inactive-color: #ffffff78;
-$font-active-color: #00a6fb;
+$font-striked-out-color: #aaa;
 $font-color: #000;
 
 $base-font: 'Manrope', sans-serif;
@@ -248,19 +248,51 @@ body {
 		background: $hover-color;
 	}
 		&__checkbox {
-			appearance: none;
+			display: flex;
+			justify-content: center;
+			align-items: center;
 			width: 20px;
 			height: 20px;
 			border: 3px solid $inter-color;
 			border-radius: 50%;
 			cursor: pointer;
+			span {
+				color: $base-color;
+				transform: scale(0);
+				transition: 0.2s cubic-bezier(.16,.66,1,1.99);
+			}
 			&:active {
 				background: $active-color;
+			}
+			&.striked {
+				border-color: $base-color;
+				span {
+					transform: scale(1);
+				}
 			}
 		}
 
 		&__title {
+			transition: 0.3s ease;
+			.task__checkbox.striked + & {
+				color: $font-striked-out-color;
+			}
 			flex: 1;
+			span { position: relative; }
+			span:after {
+				content: '';
+				position: absolute;
+				left: 0;
+				top: 50%;
+				transform: scaleX(0) translateY(-50%);
+				width: 100%;
+				height: 2px;
+				background: $font-striked-out-color;
+				transition: 0.3s ease;
+			}
+			.task__checkbox.striked + & span:after {
+				transform: scaleX(1);
+			}
 		}
 
 		&__date {
