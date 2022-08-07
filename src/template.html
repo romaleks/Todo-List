@@ -132,7 +132,7 @@
             <div class="task-popup__selections">
                <div class="task-popup__selection selection">
                   <div class="selection__box">
-                     <div class="selection__container">
+                     <div data-select="project" class="selection__container">
                         <div class="selection__option">
                            <input type="radio" class="selection__radio" id="inbox">
                            <img src="./images/inbox.svg" alt="" class="icon">
@@ -147,30 +147,33 @@
                            <label for="homework">📚 Homework</label>
                         </div>
                      </div>
-                     <div class="selection__selected"><img src="./images/inbox.svg" alt="" class="icon">Inbox</div>
+                     <div data-select="project" class="selection__selected"><img src="./images/inbox.svg" alt=""
+                           class="icon">Inbox</div>
                   </div>
                </div>
                <div class="task-popup__selection selection">
                   <div class="selection__box">
-                     <div class="selection__container">
+                     <div data-select="priority" class="selection__container">
                         <div class="selection__option">
-                           <input type="radio" class="selection__radio" id="p1">
+                           <input type="radio" class="selection__radio" data-priority="p1" id="p1">
                            <label for="p1">Priority 1</label>
                         </div>
                         <div class="selection__option">
-                           <input type="radio" class="selection__radio" id="p2">
+                           <input type="radio" class="selection__radio" data-priority="p2" id="p2">
                            <label for="p2">Priority 2</label>
                         </div>
                         <div class="selection__option">
-                           <input type="radio" class="selection__radio" id="p3">
+                           <input type="radio" class="selection__radio" data-priority="p3" id="p3">
                            <label for="p3">Priority 3</label>
                         </div>
                         <div class="selection__option">
-                           <input type="radio" class="selection__radio" id="p4">
+                           <input type="radio" class="selection__radio" data-priority="p4" id="p4">
                            <label for="p4">Priority 4</label>
                         </div>
                      </div>
-                     <div class="selection__selected">Priority 4</div>
+                     <div data-select="priority" data-priority="p4" class="selection__selected"><img
+                           src="./images/priority.svg" alt="">Priority 4
+                     </div>
                   </div>
                </div>
             </div>

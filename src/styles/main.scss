@@ -328,11 +328,16 @@ textarea {
 	justify-content: center;
 	align-items: center;
 	background: #0003;
+	visibility: hidden;
+	&.active {visibility: visible;}
 	&__form {
 		padding: 1.5rem 2rem 2rem;
 		background: #fff;
 		border-radius: 10px;
 		position: relative;
+		transform: scale(0);
+		transition: all 0.3s linear;
+		.task-popup.active & {transform: scale(1);}
 	}
 
 	&__close-btn {
@@ -421,6 +426,10 @@ textarea {
 }
 .selection {
 	width: 200px;
+	[data-priority="p1"] img { filter: invert(28%) sepia(61%) saturate(4816%) hue-rotate(341deg) brightness(99%) contrast(83%); }
+	[data-priority="p2"] img { filter: invert(29%) sepia(69%) saturate(4367%) hue-rotate(244deg) brightness(100%) contrast(106%); }
+	[data-priority="p3"] img { filter: invert(72%) sepia(84%) saturate(5067%) hue-rotate(65deg) brightness(97%) contrast(104%); }
+	[data-priority="p4"] img { filter: invert(80%) sepia(0%) saturate(1554%) hue-rotate(222deg) brightness(87%) contrast(86%); }
 	&__selected {
 		border-radius: 5px;
 		margin: 0 0 0.5rem 0;

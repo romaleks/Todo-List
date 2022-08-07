@@ -1,6 +1,4 @@
-import { editTaskSelectBoxes, editTaskOptionCnt } from "./domElements";
-
-class Task {
+export default class Task {
    constructor(title, description, priority, dueDate, isPinned) {
       this.title = title;
       this.description = description;
@@ -9,9 +7,4 @@ class Task {
       this.project = project;
       this.isPinned = isPinned;
    }
-}
-
-export default function createNewTask() {
-   // show popup, collect info, create and return new task
-   editTaskSelectBoxes.forEach(box => box.addEventListener('click', () => editTaskOptionCnt.classList.toggle('active')))
 }
