@@ -11,7 +11,6 @@ export const popupCloseBtn = document.querySelector('#popup_close_btn');
 
 export const editTaskForm = document.querySelector('.task-popup__form');
 export const editTaskSelections = document.querySelectorAll('.selection__selected');
-export const editTaskOptions = document.querySelectorAll('.selection__option');
 export const editTaskInputs = {
-
+   title: editTaskForm.querySelector('#popup_title'),
 }

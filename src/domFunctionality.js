@@ -8,6 +8,7 @@ import {
    taskPopup,
    popupCloseBtn,
 } from "./domElements";
+import Task from "./task";
 import Popup from "./taskPopup";
 
 export default class Application {
@@ -31,8 +32,11 @@ export default class Application {
       btn.classList.toggle('striked');
    }
    // Tasks
-   openClosePopup(ev) {
-      if (ev) ev.preventDefault();
+   openClosePopup(ev, value) {
+      if (ev) {
+         ev.preventDefault();
+         Popup.fillTitleInput(value);
+      }
       taskPopup.classList.toggle('active');
       Popup.addEventListeners();
    }
@@ -42,7 +46,7 @@ export default class Application {
       sectionBtns.forEach(btn => btn.addEventListener('click', () => this.activateSection(btn)));
       menuOpenCloseBtn.addEventListener('click', this.toggleMenu);
       // Tasks
-      addTaskForm.addEventListener('submit', (ev) => this.openClosePopup(ev));
+      addTaskForm.addEventListener('submit', (ev) => this.openClosePopup(ev, addTaskInput.value));
       popupCloseBtn.addEventListener('click', () => this.openClosePopup());
       taskCheckBoxBtns.forEach(btn => btn.addEventListener('click', () => this.strikeOutTask(btn)));
    }
