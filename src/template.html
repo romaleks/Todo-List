@@ -65,12 +65,14 @@
                <div class="header__icon btn"><img src="./images/options.svg" alt="Options" class="icon"></div>
             </div>
             <div class="add-task">
-               <button class="add-task__btn btn">
-                  <img src="./images/add.svg" alt="Add" class="icon">
-               </button>
-               <form class="add-task__input">
-                  <input type="text" id="task_title" name="task_title" placeholder=" " required>
-                  <label for="task_title">Add task</label>
+               <form id="form" class="add-task__form">
+                  <button id="add_task_btn" class="add-task__btn btn">
+                     <img src="./images/add.svg" alt="Add" class="icon">
+                  </button>
+                  <div class="add-task__input">
+                     <input type="text" id="add_task_input" name="task_title" placeholder=" " required>
+                     <label for="add_task_input">Add task</label>
+                  </div>
                </form>
             </div>
             <div class="tasks">
@@ -111,6 +113,70 @@
             </div>
          </div>
       </main>
+   </div>
+   <div class="task-popup">
+      <form class="task-popup__form">
+         <div id="popup_close_btn" class="task-popup__close-btn"></div>
+         <h2>Add Task</h2>
+         <div class="task-popup__container">
+            <div class="task-popup__inputs">
+               <div class="task-popup__input">
+                  <input type="text" id="popup_title" placeholder=" " required>
+                  <label for="popup_title">Task title</label>
+               </div>
+               <div class="task-popup__input">
+                  <textarea id="popup_desc" rows="8" placeholder=" "></textarea>
+                  <label for="popup_desc">Task description</label>
+               </div>
+            </div>
+            <div class="task-popup__selections">
+               <div class="task-popup__selection selection">
+                  <div class="selection__box">
+                     <div class="selection__container">
+                        <div class="selection__option">
+                           <input type="radio" class="selection__radio" id="inbox">
+                           <img src="./images/inbox.svg" alt="" class="icon">
+                           <label for="Inbox">Inbox</label>
+                        </div>
+                        <div class="selection__option">
+                           <input type="radio" class="selection__radio" id="grocery_list">
+                           <label for="grocery_list">🛒 Grocery list</label>
+                        </div>
+                        <div class="selection__option">
+                           <input type="radio" class="selection__radio" id="homework">
+                           <label for="homework">📚 Homework</label>
+                        </div>
+                     </div>
+                     <div class="selection__selected"><img src="./images/inbox.svg" alt="" class="icon">Inbox</div>
+                  </div>
+               </div>
+               <div class="task-popup__selection selection">
+                  <div class="selection__box">
+                     <div class="selection__container">
+                        <div class="selection__option">
+                           <input type="radio" class="selection__radio" id="p1">
+                           <label for="p1">Priority 1</label>
+                        </div>
+                        <div class="selection__option">
+                           <input type="radio" class="selection__radio" id="p2">
+                           <label for="p2">Priority 2</label>
+                        </div>
+                        <div class="selection__option">
+                           <input type="radio" class="selection__radio" id="p3">
+                           <label for="p3">Priority 3</label>
+                        </div>
+                        <div class="selection__option">
+                           <input type="radio" class="selection__radio" id="p4">
+                           <label for="p4">Priority 4</label>
+                        </div>
+                     </div>
+                     <div class="selection__selected">Priority 4</div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <button id="popup_add_btn" class="task-popup__btn">+</button>
+      </form>
    </div>
 </body>
 
