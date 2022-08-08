@@ -1,4 +1,4 @@
-import { refresh, taskCheckBoxBtns } from "./domElements";
+import { tasksContainer } from "./domElements";
 
 export default class Task {
    constructor(title, desc, project, priority, dueDate, isPinned) {
@@ -11,11 +11,11 @@ export default class Task {
    }
 
    strikeOutTask(btn) {
+      console.log(1);
       btn.classList.toggle('striked');
    }
 
    displayTask() {
-      const taskContainer = document.querySelector('.tasks');
       const taskElement = document.createElement('div');
       taskElement.classList.add('tasks__task', 'task');
       taskElement.setAttribute('data-priority', this.priority);
@@ -36,8 +36,8 @@ export default class Task {
             <img src="./images/delete.svg" alt="Delete" class="icon">
          </div>
       `;
-      taskContainer.appendChild(taskElement);
-      refresh();
-      taskCheckBoxBtns.forEach(btn => btn.addEventListener('click', () => this.strikeOutTask(btn)));
+      tasksContainer.appendChild(taskElement);
+      const checkBox = taskElement.querySelector('.task__checkbox');
+      checkBox.addEventListener('click', () => this.strikeOutTask(checkBox))
    }
 }

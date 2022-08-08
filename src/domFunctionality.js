@@ -33,7 +33,6 @@ export default class Application {
          Popup.fillTitleInput(value);
       }
       taskPopup.classList.toggle('active');
-      Popup.addEventListeners();
    }
    /// Event listeners
    static addEventListeners() {
@@ -43,6 +42,7 @@ export default class Application {
       // Tasks
       addTaskForm.addEventListener('submit', (ev) => this.openClosePopup(ev, addTaskInput.value));
       popupCloseBtn.addEventListener('click', () => this.openClosePopup());
+      Popup.addEventListeners();
    }
 
 }

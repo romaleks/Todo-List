@@ -252,6 +252,9 @@ textarea {
 	&[data-priority="p2"] { border-left: 3px solid #6e44ff; }
 	&[data-priority="p3"] { border-left: 3px solid #38b000; }
 	&[data-priority="p4"] { border-left: 3px solid #aaa; }
+	&.pinned {
+		background: $hover-color;
+	}
 	&:hover {
 		background: $hover-color;
 	}
