@@ -1,4 +1,6 @@
 import { tasksContainer } from "./domElements";
+import pin from './assets/pin.svg';
+import pin_active from './assets/pin-active.svg';
 
 export default class Task {
    constructor(title, desc, project, priority, dueDate, isPinned) {
@@ -12,6 +14,14 @@ export default class Task {
 
    strikeOutTask(btn) {
       btn.classList.toggle('striked');
+   }
+
+   pinTask(btn) {
+      const task = btn.parentNode;
+      const taskIcon = btn.querySelector('img');
+      task.classList.toggle('pinned');
+      if (task.classList.contains('pinned')) taskIcon.src = pin_active;
+      else taskIcon.src = pin;
    }
 
    displayTask() {
@@ -28,7 +38,7 @@ export default class Task {
          <div id="priority-btn" class="task__icon">
             <img src="./images/priority.svg" alt="Prioriry" class="icon">
          </div>
-         <div id="priority-btn" class="task__icon">
+         <div id="pin-btn" class="task__icon">
             <img src="./images/pin.svg" alt="Pin" class="icon">
          </div>
          <div id="del-btn" class="task__icon del">
@@ -37,6 +47,14 @@ export default class Task {
       `;
       tasksContainer.appendChild(taskElement);
       const checkBox = taskElement.querySelector('.task__checkbox');
+      const pinBtn = taskElement.querySelector('#pin-btn');
+      const pinIcon = pinBtn.querySelector('img');
+      pinIcon.src = pin;
       checkBox.addEventListener('click', () => this.strikeOutTask(checkBox))
+      pinBtn.addEventListener('click', () => this.pinTask(pinBtn));
+   }
+
+   addEventListeners() {
+
    }
 }

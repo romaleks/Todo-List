@@ -5,7 +5,6 @@ export const menuOpenCloseBtn = document.querySelector('#menu_btn');
 export const addTaskForm = document.querySelector('#form');
 export const addTaskInput = addTaskForm.querySelector('#add_task_input');
 export const tasksContainer = document.querySelector('.tasks');
-export const taskCheckBoxBtns = document.querySelectorAll('.task__checkbox');
 
 export const taskPopup = document.querySelector('.task-popup');
 export const popupCloseBtn = taskPopup.querySelector('#popup_close_btn');
