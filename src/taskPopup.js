@@ -35,6 +35,11 @@ export default class Popup {
       const priority = popupInputs.priority.getAttribute('data-priority');
       const newTask = new Task(title, desc, project, priority);
       newTask.displayTask();
+      popupInputs.title.value = '';
+      popupInputs.desc.value = '';
+      popupInputs.project.innerHTML = '<img src="./images/inbox.svg" alt="" class="icon">Inbox</div>';
+      popupInputs.priority.innerHTML = '<img src="./images/priority.svg" alt="">Priority 4';
+      popupInputs.priority.setAttribute('data-priority', 'p4');
    }
 
    static addEventListeners() {

@@ -46,15 +46,12 @@ export default class Task {
          </div>
       `;
       tasksContainer.appendChild(taskElement);
+
       const checkBox = taskElement.querySelector('.task__checkbox');
       const pinBtn = taskElement.querySelector('#pin-btn');
       const pinIcon = pinBtn.querySelector('img');
       pinIcon.src = pin;
       checkBox.addEventListener('click', () => this.strikeOutTask(checkBox))
       pinBtn.addEventListener('click', () => this.pinTask(pinBtn));
-   }
-
-   addEventListeners() {
-
    }
 }
