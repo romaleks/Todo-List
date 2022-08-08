@@ -11,7 +11,6 @@ export default class Task {
    }
 
    strikeOutTask(btn) {
-      console.log(1);
       btn.classList.toggle('striked');
    }
 

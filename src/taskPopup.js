@@ -12,14 +12,18 @@ export default class Popup {
 
    static activateSelection(select) {
       const container = document.querySelector('[data-select="' + select.getAttribute('data-select') + '"]');
-      const options = container.querySelectorAll('.selection__option');
       container.classList.toggle('active');
+      return container;
+   }
+
+   static chooseOption(select, container) {
+      const options = container.querySelectorAll('.selection__option');
       options.forEach(option => option.addEventListener('click', () => {
          select.innerHTML = option.innerHTML;
          if (select.hasAttribute('data-priority')) {
             select.setAttribute('data-priority', option.getAttribute('data-priority'));
          }
-         container.classList.remove('active');
+         container.classList.toggle('active');
       }));
    }
 
@@ -34,7 +38,10 @@ export default class Popup {
    }
 
    static addEventListeners() {
-      popupSelections.forEach(select => select.addEventListener('click', () => this.activateSelection(select)));
+      popupSelections.forEach(select => {
+         select.addEventListener('click', () => this.activateSelection(select));
+         this.chooseOption(select, document.querySelector('[data-select="' + select.getAttribute('data-select') + '"]'));
+      })
 
       popupForm.addEventListener('submit', (ev) => this.createTask(ev));
    }

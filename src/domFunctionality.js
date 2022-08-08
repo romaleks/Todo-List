@@ -14,7 +14,10 @@ export default class Application {
 
    static angle = 0;
 
-   static startApp() { this.addEventListeners() }
+   static startApp() {
+      this.addEventListeners();
+      Popup.addEventListeners();
+   }
    /// Actions
    // Menu
    static toggleMenu = () => {
@@ -42,7 +45,6 @@ export default class Application {
       // Tasks
       addTaskForm.addEventListener('submit', (ev) => this.openClosePopup(ev, addTaskInput.value));
       popupCloseBtn.addEventListener('click', () => this.openClosePopup());
-      Popup.addEventListeners();
    }
 
 }
