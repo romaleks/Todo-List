@@ -1,28 +1,41 @@
 import Task from "./task";
 import {
-   editTaskForm,
-   editTaskSelections,
-   editTaskInputs,
-
+   popupForm,
+   popupSelections,
+   popupInputs,
 } from "./domElements";
 
 export default class Popup {
    static fillTitleInput(value) {
-      editTaskInputs.title.value = value;
+      popupInputs.title.value = value;
+   }
+
+   static activateSelection(select) {
+      const container = document.querySelector('[data-select="' + select.getAttribute('data-select') + '"]');
+      const options = container.querySelectorAll('.selection__option');
+      container.classList.toggle('active');
+      options.forEach(option => option.addEventListener('click', () => {
+         select.innerHTML = option.innerHTML;
+         if (select.hasAttribute('data-priority')) {
+            select.setAttribute('data-priority', option.getAttribute('data-priority'));
+         }
+         container.classList.remove('active');
+      }));
+   }
+
+   static createTask(ev) {
+      ev.preventDefault();
+      const title = popupInputs.title.value;
+      const desc = popupInputs.desc.value;
+      const project = popupInputs.project.textContent;
+      const priority = popupInputs.priority.getAttribute('data-priority');
+      const newTask = new Task(title, desc, project, priority);
+      newTask.displayTask();
    }
 
    static addEventListeners() {
-      editTaskSelections.forEach(select => select.addEventListener('click', () => {
-         const container = document.querySelector('[data-select="' + select.getAttribute('data-select') + '"]');
-         const options = container.querySelectorAll('.selection__option');
-         const selected = container.nextElementSibling;
-         container.classList.toggle('active');
-         options.forEach(option => option.addEventListener('click', () => {
-            selected.innerHTML = option.innerHTML;
-            if (select.hasAttribute('data-priority')) {
-               select.setAttribute('data-priority', option.getAttribute('data-priority'));
-            }
-         }));
-      }));
+      popupSelections.forEach(select => select.addEventListener('click', () => this.activateSelection(select)));
+
+      popupForm.addEventListener('submit', (ev) => this.createTask(ev));
    }
 } 

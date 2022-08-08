@@ -247,8 +247,11 @@ textarea {
 	gap: 7px;
 	padding: 0.5rem;
 	border: 1px solid $inter-color;
-	border-left: 2px solid red;
 	border-radius: 5px;
+	&[data-priority="p1"] { border-left: 3px solid #e63946; }
+	&[data-priority="p2"] { border-left: 3px solid #6e44ff; }
+	&[data-priority="p3"] { border-left: 3px solid #38b000; }
+	&[data-priority="p4"] { border-left: 3px solid #aaa; }
 	&:hover {
 		background: $hover-color;
 	}

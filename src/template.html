@@ -76,7 +76,7 @@
                </form>
             </div>
             <div class="tasks">
-               <div class="tasks__task task">
+               <div data-priority="p1" class="tasks__task task">
                   <div class="task__checkbox"><span>✔</span></div>
                   <div class="task__title"><span>Buy vegetables</span></div>
                   <div class="task__date">27 May</div>
@@ -93,7 +93,7 @@
                      <img src="./images/delete.svg" alt="Delete" class="icon">
                   </div>
                </div>
-               <div class="tasks__task task">
+               <div data-priority="p2" class="tasks__task task">
                   <div class="task__checkbox"><span>✔</span></div>
                   <div class="task__title"><span>Buy fruits</span></div>
                   <div class="task__date">27 May</div>
@@ -134,18 +134,11 @@
                   <div class="selection__box">
                      <div data-select="project" class="selection__container">
                         <div class="selection__option">
-                           <input type="radio" class="selection__radio" id="inbox">
                            <img src="./images/inbox.svg" alt="" class="icon">
-                           <label for="Inbox">Inbox</label>
+                           Inbox
                         </div>
-                        <div class="selection__option">
-                           <input type="radio" class="selection__radio" id="grocery_list">
-                           <label for="grocery_list">🛒 Grocery list</label>
-                        </div>
-                        <div class="selection__option">
-                           <input type="radio" class="selection__radio" id="homework">
-                           <label for="homework">📚 Homework</label>
-                        </div>
+                        <div class="selection__option">🛒 Grocery list</div>
+                        <div class="selection__option">📚 Homework</div>
                      </div>
                      <div data-select="project" class="selection__selected"><img src="./images/inbox.svg" alt=""
                            class="icon">Inbox</div>
@@ -155,24 +148,20 @@
                   <div class="selection__box">
                      <div data-select="priority" class="selection__container">
                         <div data-priority="p1" class="selection__option">
-                           <input type="radio" class="selection__radio" data-priority="p1" id="p1">
                            <img src="./images/priority.svg" alt="">
-                           <label for="p1">Priority 1</label>
+                           <div>Priority 1</div>
                         </div>
                         <div data-priority="p2" class="selection__option">
-                           <input type="radio" class="selection__radio" data-priority="p2" id="p2">
                            <img src="./images/priority.svg" alt="">
-                           <label for="p2">Priority 2</label>
+                           <div>Priority 2</div>
                         </div>
                         <div data-priority="p3" class="selection__option">
-                           <input type="radio" class="selection__radio" data-priority="p3" id="p3">
                            <img src="./images/priority.svg" alt="">
-                           <label for="p3">Priority 3</label>
+                           <div>Priority 3</div>
                         </div>
                         <div data-priority="p4" class="selection__option">
-                           <input type="radio" class="selection__radio" data-priority="p4" id="p4">
                            <img src="./images/priority.svg" alt="">
-                           <label for="p4">Priority 4</label>
+                           <div>Priority 4</div>
                         </div>
                      </div>
                      <div data-select="priority" data-priority="p4" class="selection__selected"><img
@@ -181,7 +170,7 @@
                   </div>
                </div>
                <div class="task-popup__btn-cnt">
-                  <button id="popup_add_btn" class="task-popup__btn">+</button>
+                  <button id="popup_submit_btn" class="task-popup__btn">+</button>
                </div>
             </div>
          </div>
