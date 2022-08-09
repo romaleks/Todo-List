@@ -4,10 +4,12 @@ import {
    popupForm,
    popupSelections,
    popupInputs,
-   taskIndex,
+   addTaskInput,
 } from "./domElements";
 
 export default class Popup {
+   static taskIndex = 3;
+
    static fillExistingInputs(value) {
       if (typeof value === 'object') {
          const priorityText = popupForm.querySelector('.selection__selected[data-select="priority"]').lastChild;
@@ -49,8 +51,9 @@ export default class Popup {
          const desc = popupInputs.desc.value;
          const project = popupInputs.project.textContent;
          const priority = popupInputs.priority.getAttribute('data-priority');
-         const newTask = new Task(title, desc, project, priority, index);
+         const newTask = new Task(title, desc, project, priority, null, false, ++this.taskIndex);
 
+         addTaskInput.value = '';
          popupInputs.title.value = '';
          popupInputs.desc.value = '';
          popupInputs.project.innerHTML = '<img src="./images/inbox.svg" alt="" class="icon">Inbox</div>';
@@ -58,7 +61,6 @@ export default class Popup {
          popupInputs.priority.setAttribute('data-priority', 'p4');
          tasksObject.Inbox.push(newTask);
          loopTasks();
-         taskIndex++;
       }
    }
 

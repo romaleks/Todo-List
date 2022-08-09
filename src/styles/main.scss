@@ -514,3 +514,36 @@ textarea {
 		display: none;
 	}
 }
+.task-popup {
+	&__form { min-width: 200px; }
+
+	&__title {
+		font-size: 1.5rem;
+		color: $font-inter-color;
+	}
+
+	&__title-text {
+		font-size: 1.3rem;
+		margin: 0 0 1rem 0;
+		position: relative;
+		&:after {
+			content: '';
+			position: absolute;
+			left: 0;
+			bottom: -0.8rem;
+			width: 100%;
+			height: 2px;
+			background: $inter-color;
+		}
+	}
+
+	&__description {
+		font-size: 1.5rem;
+		color: $font-inter-color;
+	}
+
+	&__description-text {
+		font-size: 1.1rem;
+		max-width: 500px;
+	}
+}

@@ -1,7 +1,7 @@
 import Application from "./domFunctionality";
 import Popup from "./taskPopup";
 import { tasksObject } from "./tasksObject";
-import { tasksContainer, taskIndex } from "./domElements";
+import { tasksContainer, detailsTaskPopup, detailsTaskPopupBtn, detailsText } from "./domElements";
 import pin from './assets/pin.svg';
 import pin_active from './assets/pin-active.svg';
 
@@ -42,6 +42,13 @@ export class Task {
       loopTasks();
    }
 
+   seeTaskDetails(task) {
+      detailsTaskPopup.classList.add('active');
+      detailsText.title.textContent = task.title;
+      detailsText.desc.textContent = task.desc;
+      detailsTaskPopupBtn.addEventListener('click', () => detailsTaskPopup.classList.remove('active'))
+   }
+
    deleteTask(task) {
       tasksObject.Inbox.splice(task.index, 1);
       loopTasks(task.initialIndex);
@@ -59,8 +66,8 @@ export function createTask(task) {
       <div id="edit-btn" class="task__icon">
          <img src="./images/edit.svg" alt="Edit" class="icon">
       </div>
-      <div id="priority-btn" class="task__icon">
-         <img src="./images/priority.svg" alt="Prioriry" class="icon">
+      <div id="details-btn" class="task__icon">
+         <img src="./images/details.svg" alt="Details" class="icon">
       </div>
       <div id="pin-btn" class="task__icon">
          <img src="./images/pin.svg" alt="Pin" class="icon">
@@ -75,6 +82,7 @@ export function createTask(task) {
    const editBtn = taskElement.querySelector('#edit-btn');
    const pinBtn = taskElement.querySelector('#pin-btn');
    const pinIcon = pinBtn.querySelector('img');
+   const detailsBtn = taskElement.querySelector('#details-btn');
    const deleteBtn = taskElement.querySelector('#del-btn');
    pinIcon.src = pin;
 
@@ -87,6 +95,7 @@ export function createTask(task) {
       if (!task.isPinned) task.pinTask(task);
       else task.unpinTask(task);
    });
+   detailsBtn.addEventListener('click', () => task.seeTaskDetails(task));
    deleteBtn.addEventListener('click', () => task.deleteTask(task));
 
    return taskElement;
