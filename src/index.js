@@ -4,14 +4,10 @@ import { Task, createTask, loopTasks } from './task';
 import { tasksObject } from './tasksObject';
 
 Application.startApp();
-const exampleTask1 = new Task('Buy vegetables', '', '🛒 Grocery list', 'p1',
-   '"\n<img src=\"./images/priority.svg\" alt=\"\">\n<div>Priority 1</div>\n', null, false, 0);
-const exampleTask2 = new Task('Buy fruits', '', '🛒 Grocery list', 'p2',
-   '"\n<img src=\"./images/priority.svg\" alt=\"\">\n<div>Priority 2</div>\n', null, false, 1);
-const exampleTask3 = new Task('Buy dsads', '', '🛒 Grocery list', 'p1',
-   '"\n<img src=\"./images/priority.svg\" alt=\"\">\n<div>Priority 1</div>\n', null, false, 2);
-const exampleTask4 = new Task('Buy apple', '', '🛒 Grocery list', 'p2',
-   '"\n<img src=\"./images/priority.svg\" alt=\"\">\n<div>Priority 2</div>\n', null, false, 3);
+const exampleTask1 = new Task('Buy vegetables', '', '🛒 Grocery list', 'p1', null, false, 0);
+const exampleTask2 = new Task('Buy fruits', '', '🛒 Grocery list', 'p2', null, false, 1);
+const exampleTask3 = new Task('Buy dsads', '', '🛒 Grocery list', 'p1', null, false, 2);
+const exampleTask4 = new Task('Buy apple', '', '🛒 Grocery list', 'p2', null, false, 3);
 createTask(exampleTask1);
 createTask(exampleTask2);
 createTask(exampleTask3);

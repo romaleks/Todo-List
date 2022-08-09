@@ -10,10 +10,12 @@ import {
 export default class Popup {
    static fillExistingInputs(value) {
       if (typeof value === 'object') {
+         const priorityText = popupForm.querySelector('.selection__selected[data-select="priority"]').lastChild;
          popupInputs.title.value = value.title;
          popupInputs.desc.value = value.desc;
          popupInputs.project.textContent = value.project;
-         popupInputs.priority.innerHTML = value.priorityHTML;
+         priorityText.textContent = 'Priority ' + value.priority[1];
+         console.log(priorityText);
          popupInputs.priority.setAttribute('data-priority', value.priority);
          popupInputs.isEdit = true;
          popupInputs.task = value;
@@ -48,8 +50,7 @@ export default class Popup {
          const desc = popupInputs.desc.value;
          const project = popupInputs.project.textContent;
          const priority = popupInputs.priority.getAttribute('data-priority');
-         const priorityHTML = popupInputs.priority.innerHTML;
-         const newTask = new Task(title, desc, project, priority, priorityHTML, index);
+         const newTask = new Task(title, desc, project, priority, index);
 
          popupInputs.title.value = '';
          popupInputs.desc.value = '';
@@ -67,6 +68,7 @@ export default class Popup {
       task.desc = popupInputs.desc.value;
       task.project = popupInputs.project.textContent;
       task.priority = popupInputs.priority.getAttribute('data-priority');
+      loopTasks();
    }
 
    static addEventListeners() {

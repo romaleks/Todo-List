@@ -6,12 +6,11 @@ import pin from './assets/pin.svg';
 import pin_active from './assets/pin-active.svg';
 
 export class Task {
-   constructor(title, desc, project, priority, priorityHTML, dueDate, isPinned, index) {
+   constructor(title, desc, project, priority, dueDate, isPinned, index) {
       this.title = title;
       this.desc = desc;
       this.project = project;
       this.priority = priority;
-      this.priorityHTML = priorityHTML;
       this.dueDate = dueDate;
       this.isPinned = isPinned;
       this.index = index;
@@ -75,7 +74,7 @@ export function createTask(task) {
    checkBox.addEventListener('click', () => task.strikeOutTask(checkBox));
    editBtn.addEventListener('click', () => {
       Application.togglePopup();
-      Popup.fillExistingInputs(this);
+      Popup.fillExistingInputs(task);
    })
    pinBtn.addEventListener('click', () => {
       if (!task.isPinned) task.pinTask(task);
