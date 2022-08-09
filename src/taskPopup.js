@@ -59,6 +59,7 @@ export default class Popup {
          popupInputs.project.innerHTML = '<img src="./images/inbox.svg" alt="" class="icon">Inbox</div>';
          popupInputs.priority.innerHTML = '<img src="./images/priority.svg" alt="">Priority 4';
          popupInputs.priority.setAttribute('data-priority', 'p4');
+         if (newTask.project != 'Inbox') tasksObject[newTask.project].push(newTask);
          tasksObject.Inbox.push(newTask);
          loopTasks();
       }

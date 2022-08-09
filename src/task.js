@@ -102,14 +102,17 @@ export function createTask(task) {
 }
 
 export function loopTasks(delIndex) {
+   const activeSection = document.querySelector('.section.active').lastElementChild;
    tasksContainer.innerHTML = '';
    let index = 0;
-   for (const task of tasksObject.Inbox) {
-      task.index = index++;
-      if (delIndex !== undefined) {
-         if (task.initialIndex > delIndex) task.initialIndex -= 1;
+   if (Object.keys(tasksObject).includes(activeSection.textContent)) {
+      for (const task of tasksObject[activeSection.textContent]) {
+         task.index = index++;
+         if (delIndex !== undefined) {
+            if (task.initialIndex > delIndex) task.initialIndex -= 1;
+         }
+         if (task.isPinned) task.togglePinClass(createTask(task));
+         else createTask(task);
       }
-      if (task.isPinned) task.togglePinClass(createTask(task));
-      else createTask(task);
    }
 }

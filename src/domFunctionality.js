@@ -7,6 +7,7 @@ import {
    taskPopup,
    popupCloseBtn,
 } from "./domElements";
+import { loopTasks } from "./task";
 import Popup from "./taskPopup";
 
 export default class Application {
@@ -27,6 +28,7 @@ export default class Application {
    static activateSection(btn) {
       sectionBtns.forEach(btn => btn.classList.remove('active'));
       btn.classList.add('active');
+      loopTasks();
    }
    // Tasks
    static togglePopup(ev, value) {
