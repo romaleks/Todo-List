@@ -44,7 +44,7 @@ export class Task {
 
    deleteTask(task) {
       tasksObject.Inbox.splice(task.index, 1);
-      loopTasks();
+      loopTasks(task.initialIndex);
    }
 }
 
@@ -92,11 +92,14 @@ export function createTask(task) {
    return taskElement;
 }
 
-export function loopTasks() {
+export function loopTasks(delIndex) {
    tasksContainer.innerHTML = '';
    let index = 0;
    for (const task of tasksObject.Inbox) {
       task.index = index++;
+      if (delIndex !== undefined) {
+         if (task.initialIndex > delIndex) task.initialIndex -= 1;
+      }
       if (task.isPinned) task.togglePinClass(createTask(task));
       else createTask(task);
    }
