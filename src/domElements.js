@@ -16,3 +16,5 @@ export const popupInputs = {
    project: popupForm.querySelector('.selection__selected[data-select="project"]'),
    priority: popupForm.querySelector('.selection__selected[data-select="priority"]'),
 }
+
+export const taskIndex = 2;

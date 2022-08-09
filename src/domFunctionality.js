@@ -4,7 +4,6 @@ import {
    menuOpenCloseBtn,
    addTaskForm,
    addTaskInput,
-   taskCheckBoxBtns,
    taskPopup,
    popupCloseBtn,
 } from "./domElements";
@@ -30,10 +29,10 @@ export default class Application {
       btn.classList.add('active');
    }
    // Tasks
-   static openClosePopup(ev, value) {
+   static togglePopup(ev, value) {
       if (ev) {
          ev.preventDefault();
-         Popup.fillTitleInput(value);
+         Popup.fillExistingInputs(value);
       }
       taskPopup.classList.toggle('active');
    }
@@ -43,8 +42,8 @@ export default class Application {
       sectionBtns.forEach(btn => btn.addEventListener('click', () => this.activateSection(btn)));
       menuOpenCloseBtn.addEventListener('click', this.toggleMenu);
       // Tasks
-      addTaskForm.addEventListener('submit', (ev) => this.openClosePopup(ev, addTaskInput.value));
-      popupCloseBtn.addEventListener('click', () => this.openClosePopup());
+      addTaskForm.addEventListener('submit', (ev) => this.togglePopup(ev, addTaskInput.value));
+      popupCloseBtn.addEventListener('click', () => this.togglePopup());
    }
 
 }
