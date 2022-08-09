@@ -15,7 +15,6 @@ export default class Popup {
          popupInputs.desc.value = value.desc;
          popupInputs.project.textContent = value.project;
          priorityText.textContent = 'Priority ' + value.priority[1];
-         console.log(priorityText);
          popupInputs.priority.setAttribute('data-priority', value.priority);
          popupInputs.isEdit = true;
          popupInputs.task = value;

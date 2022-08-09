@@ -41,6 +41,11 @@ export class Task {
       tasksObject.Inbox.splice(task.initialIndex, 0, pinnedTask);
       loopTasks();
    }
+
+   deleteTask(task) {
+      tasksObject.Inbox.splice(task.index, 1);
+      loopTasks();
+   }
 }
 
 export function createTask(task) {
@@ -70,16 +75,19 @@ export function createTask(task) {
    const editBtn = taskElement.querySelector('#edit-btn');
    const pinBtn = taskElement.querySelector('#pin-btn');
    const pinIcon = pinBtn.querySelector('img');
+   const deleteBtn = taskElement.querySelector('#del-btn');
    pinIcon.src = pin;
+
    checkBox.addEventListener('click', () => task.strikeOutTask(checkBox));
    editBtn.addEventListener('click', () => {
       Application.togglePopup();
       Popup.fillExistingInputs(task);
-   })
+   });
    pinBtn.addEventListener('click', () => {
       if (!task.isPinned) task.pinTask(task);
       else task.unpinTask(task);
-   })
+   });
+   deleteBtn.addEventListener('click', () => task.deleteTask(task));
 
    return taskElement;
 }
