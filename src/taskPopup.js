@@ -74,15 +74,16 @@ export default class Popup {
    }
 
    static editTask(task) {
+      task.title = popupInputs.title.value;
+      task.desc = popupInputs.desc.value;
+      task.project = popupInputs.project.textContent;
+      task.priority = popupInputs.priority.getAttribute('data-priority');
+
       tasksObject.Inbox.tasks[task.globalIndex].title = popupInputs.title.value;
       tasksObject.Inbox.tasks[task.globalIndex].desc = popupInputs.desc.value;
       tasksObject.Inbox.tasks[task.globalIndex].project = popupInputs.project.textContent;
       tasksObject.Inbox.tasks[task.globalIndex].priority = popupInputs.priority.getAttribute('data-priority');
 
-      task.title = popupInputs.title.value;
-      task.desc = popupInputs.desc.value;
-      task.project = popupInputs.project.textContent;
-      task.priority = popupInputs.priority.getAttribute('data-priority');
       loopTasks();
    }
 
