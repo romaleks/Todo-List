@@ -51,7 +51,7 @@ export default class Popup {
          const desc = popupInputs.desc.value;
          const project = popupInputs.project.textContent;
          const priority = popupInputs.priority.getAttribute('data-priority');
-         const newTask = new Task(title, desc, project, priority, null, false, ++this.taskIndex);
+         const newTask = new Task(title, desc, project, priority, null, false, null);
 
          addTaskInput.value = '';
          popupInputs.title.value = '';
@@ -59,13 +59,26 @@ export default class Popup {
          popupInputs.project.innerHTML = '<img src="./images/inbox.svg" alt="" class="icon">Inbox</div>';
          popupInputs.priority.innerHTML = '<img src="./images/priority.svg" alt="">Priority 4';
          popupInputs.priority.setAttribute('data-priority', 'p4');
-         if (newTask.project != 'Inbox') tasksObject[newTask.project].push(newTask);
-         tasksObject.Inbox.push(newTask);
+         if (newTask.project != 'Inbox') {
+            const newTask = new Task(title, desc, project, priority, null, false, null);
+            newTask.initialIndex = tasksObject[newTask.project].tasksNum;
+            newTask.index = tasksObject[newTask.project].tasksNum++;
+            newTask.globalIndex = tasksObject.Inbox.tasksNum;
+            tasksObject[newTask.project].tasks.push(newTask);
+         }
+         newTask.initialIndex = tasksObject.Inbox.tasksNum;
+         newTask.index = tasksObject.Inbox.tasksNum++;
+         tasksObject.Inbox.tasks.push(newTask);
          loopTasks();
       }
    }
 
    static editTask(task) {
+      tasksObject.Inbox.tasks[task.globalIndex].title = popupInputs.title.value;
+      tasksObject.Inbox.tasks[task.globalIndex].desc = popupInputs.desc.value;
+      tasksObject.Inbox.tasks[task.globalIndex].project = popupInputs.project.textContent;
+      tasksObject.Inbox.tasks[task.globalIndex].priority = popupInputs.priority.getAttribute('data-priority');
+
       task.title = popupInputs.title.value;
       task.desc = popupInputs.desc.value;
       task.project = popupInputs.project.textContent;

@@ -15,6 +15,7 @@ export class Task {
       this.isPinned = isPinned;
       this.index = index;
       this.initialIndex = index;
+      this.globalIndex = index;
    }
 
    strikeOutTask(btn) {
@@ -29,16 +30,16 @@ export class Task {
    }
 
    pinTask(task) {
-      const pinnedTask = tasksObject.Inbox.splice(task.index, 1)[0];
+      const pinnedTask = tasksObject[task.project].tasks.splice(task.index, 1)[0];
       pinnedTask.isPinned = true;
-      tasksObject.Inbox.unshift(pinnedTask);
+      tasksObject[task.project].tasks.unshift(pinnedTask);
       loopTasks();
    }
 
    unpinTask(task) {
-      const pinnedTask = tasksObject.Inbox.splice(task.index, 1)[0];
+      const pinnedTask = tasksObject[task.project].tasks.splice(task.index, 1)[0];
       pinnedTask.isPinned = false;
-      tasksObject.Inbox.splice(task.initialIndex, 0, pinnedTask);
+      tasksObject[task.project].tasks.splice(task.initialIndex, 0, pinnedTask);
       loopTasks();
    }
 
@@ -50,7 +51,8 @@ export class Task {
    }
 
    deleteTask(task) {
-      tasksObject.Inbox.splice(task.index, 1);
+      tasksObject.Inbox.tasks.splice(task.index, 1);
+      tasksObject[task.project].tasks.splice(task.index, 1);
       loopTasks(task.initialIndex);
    }
 }
@@ -106,7 +108,7 @@ export function loopTasks(delIndex) {
    tasksContainer.innerHTML = '';
    let index = 0;
    if (Object.keys(tasksObject).includes(activeSection.textContent)) {
-      for (const task of tasksObject[activeSection.textContent]) {
+      for (const task of tasksObject[activeSection.textContent].tasks) {
          task.index = index++;
          if (delIndex !== undefined) {
             if (task.initialIndex > delIndex) task.initialIndex -= 1;
