@@ -6,6 +6,8 @@ import {
    addTaskInput,
    taskPopup,
    popupCloseBtn,
+   headerTitle,
+   headerIcon,
 } from "./domElements";
 import { loopTasks } from "./task";
 import Popup from "./taskPopup";
@@ -28,6 +30,7 @@ export default class Application {
    static activateSection(btn) {
       sectionBtns.forEach(btn => btn.classList.remove('active'));
       btn.classList.add('active');
+      headerTitle.textContent = btn.textContent;
       loopTasks();
    }
    // Tasks

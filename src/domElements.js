@@ -2,6 +2,9 @@ export const menu = document.querySelector('.menu');
 export const sectionBtns = document.querySelectorAll('.section:not(.btn, .menu__sect-title)')
 export const menuOpenCloseBtn = document.querySelector('#menu_btn');
 
+export const headerTitle = document.querySelector('.header__title');
+export const headerIcon = headerTitle.querySelector('img');
+
 export const addTaskForm = document.querySelector('#form');
 export const addTaskInput = addTaskForm.querySelector('#add_task_input');
 export const tasksContainer = document.querySelector('.tasks');
