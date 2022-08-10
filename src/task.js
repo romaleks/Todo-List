@@ -29,17 +29,17 @@ export class Task {
       else taskIcon.src = pin;
    }
 
-   pinTask(task) {
-      const pinnedTask = tasksObject[task.project].tasks.splice(task.index, 1)[0];
+   pinTask(task, section) {
+      const pinnedTask = tasksObject[section.textContent].tasks.splice(task.index, 1)[0];
       pinnedTask.isPinned = true;
-      tasksObject[task.project].tasks.unshift(pinnedTask);
+      tasksObject[section.textContent].tasks.unshift(pinnedTask);
       loopTasks();
    }
 
-   unpinTask(task) {
-      const pinnedTask = tasksObject[task.project].tasks.splice(task.index, 1)[0];
+   unpinTask(task, section) {
+      const pinnedTask = tasksObject[section.textContent].tasks.splice(task.index, 1)[0];
       pinnedTask.isPinned = false;
-      tasksObject[task.project].tasks.splice(task.initialIndex, 0, pinnedTask);
+      tasksObject[section.textContent].tasks.splice(task.initialIndex, 0, pinnedTask);
       loopTasks();
    }
 
@@ -57,7 +57,7 @@ export class Task {
    }
 }
 
-export function createTask(task) {
+export function createTask(task, section) {
    const taskElement = document.createElement('div');
    taskElement.classList.add('tasks__task', 'task');
    taskElement.setAttribute('data-priority', task.priority);
@@ -94,8 +94,8 @@ export function createTask(task) {
       Popup.fillExistingInputs(task);
    });
    pinBtn.addEventListener('click', () => {
-      if (!task.isPinned) task.pinTask(task);
-      else task.unpinTask(task);
+      if (!task.isPinned) task.pinTask(task, section);
+      else task.unpinTask(task, section);
    });
    detailsBtn.addEventListener('click', () => task.seeTaskDetails(task));
    deleteBtn.addEventListener('click', () => task.deleteTask(task));
@@ -113,8 +113,8 @@ export function loopTasks(delIndex) {
          if (delIndex !== undefined) {
             if (task.initialIndex > delIndex) task.initialIndex -= 1;
          }
-         if (task.isPinned) task.togglePinClass(createTask(task));
-         else createTask(task);
+         if (task.isPinned) task.togglePinClass(createTask(task, activeSection));
+         else createTask(task, activeSection);
       }
    }
 }
