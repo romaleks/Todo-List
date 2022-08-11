@@ -1,6 +1,6 @@
 export const tasksObject = {
    'Inbox': {
-      tasksNum: 4,
+      tasksNum: 2,
       tasks: []
    },
    '🛒 Grocery list': {

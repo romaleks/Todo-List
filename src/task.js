@@ -2,6 +2,7 @@ import Application from "./domFunctionality";
 import Popup from "./taskPopup";
 import { tasksObject } from "./tasksObject";
 import { tasksContainer, detailsTaskPopup, detailsTaskPopupBtn, detailsText } from "./domElements";
+import { format, isToday, parseISO } from "date-fns";
 import pin from './assets/pin.svg';
 import pin_active from './assets/pin-active.svg';
 
@@ -51,20 +52,27 @@ export class Task {
    }
 
    deleteTask(task) {
-      tasksObject.Inbox.tasks.splice(task.initialIndex, 1);
-      tasksObject[task.project].tasks.splice(task.index, 1);
+      const activeSectionText = document.querySelector('.section.active').lastElementChild.textContent;
+      if (activeSectionText == 'Inbox') tasksObject.Inbox.tasks.splice(task.index, 1);
+      else tasksObject.Inbox.tasks.splice(task.initialIndex, 1);
+      tasksObject[task.project].tasks.splice(task.initialIndex, 1);
       loopTasks(task.initialIndex);
    }
 }
 
 export function createTask(task, section) {
    const taskElement = document.createElement('div');
+   let elementDate;
+   if (isToday(parseISO(task.dueDate))) elementDate = 'Today';
+   else if (!task.dueDate) elementDate = 'No date';
+   else elementDate = format(new Date(task.dueDate), 'd MMMM');
+
    taskElement.classList.add('tasks__task', 'task');
    taskElement.setAttribute('data-priority', task.priority);
    taskElement.innerHTML = `
       <div class="task__checkbox"><span>✔</span></div>
       <div class="task__title"><span>${task.title}</span></div>
-      <div class="task__date">27 May</div>
+      <div class="task__date">${elementDate}</div>
       <div id="edit-btn" class="task__icon">
          <img src="./images/edit.svg" alt="Edit" class="icon">
       </div>

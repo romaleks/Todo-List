@@ -36,5 +36,6 @@ export const popupInputs = {
    title: popupForm.querySelector('#popup_title'),
    desc: popupForm.querySelector('#popup_desc'),
    project: popupForm.querySelector('.selection__selected[data-select="project"]'),
+   dueDate: popupForm.querySelector('#popup_due_date'),
    priority: popupForm.querySelector('.selection__selected[data-select="priority"]'),
 }

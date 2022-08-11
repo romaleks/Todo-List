@@ -450,6 +450,15 @@ textarea {
 	[data-priority="p2"] img { filter: invert(29%) sepia(69%) saturate(4367%) hue-rotate(244deg) brightness(100%) contrast(106%); }
 	[data-priority="p3"] img { filter: invert(72%) sepia(84%) saturate(5067%) hue-rotate(65deg) brightness(97%) contrast(104%); }
 	[data-priority="p4"] img { filter: invert(80%) sepia(0%) saturate(1554%) hue-rotate(222deg) brightness(87%) contrast(86%); }
+	input[type="date"] {
+		width: 100%;
+		padding: 0.5rem;
+		box-sizing: border-box;
+		border: none;
+		outline: none;
+		box-shadow: 0 0 10px $inter-color;
+		font-size: 1rem;
+	}
 	&__selected {
 		border-radius: 5px;
 		margin: 0 0 0.5rem 0;

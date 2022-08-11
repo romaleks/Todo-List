@@ -22,6 +22,7 @@ export default class Popup {
          popupInputs.project.textContent = value.project;
          priorityText.textContent = 'Priority ' + value.priority[1];
          popupInputs.priority.setAttribute('data-priority', value.priority);
+         popupInputs.dueDate.value = value.dueDate;
          popupInputs.isEdit = true;
          popupInputs.task = value;
       } else {
@@ -90,7 +91,8 @@ export default class Popup {
          const desc = popupInputs.desc.value;
          const project = popupInputs.project.textContent;
          const priority = popupInputs.priority.getAttribute('data-priority');
-         const newTask = new Task(title, desc, project, priority, null, false, null);
+         const dueDate = popupInputs.dueDate.value;
+         const newTask = new Task(title, desc, project, priority, dueDate, false, null);
 
          addTaskInput.value = '';
          popupInputs.title.value = '';
@@ -98,8 +100,9 @@ export default class Popup {
          popupInputs.project.innerHTML = '<img src="./images/inbox.svg" alt="" class="icon">Inbox</div>';
          popupInputs.priority.innerHTML = '<img src="./images/priority.svg" alt="">Priority 4';
          popupInputs.priority.setAttribute('data-priority', 'p4');
+         popupInputs.dueDate.value = '';
          if (newTask.project != 'Inbox') {
-            const newTask = new Task(title, desc, project, priority, null, false, null);
+            const newTask = new Task(title, desc, project, priority, dueDate, false, null);
             newTask.initialIndex = tasksObject[newTask.project].tasksNum;
             newTask.index = tasksObject[newTask.project].tasksNum++;
             newTask.globalIndex = tasksObject.Inbox.tasksNum;
@@ -117,11 +120,13 @@ export default class Popup {
       task.desc = popupInputs.desc.value;
       task.project = popupInputs.project.textContent;
       task.priority = popupInputs.priority.getAttribute('data-priority');
+      task.dueDate = popupInputs.dueDate.value;
 
       tasksObject.Inbox.tasks[task.globalIndex].title = popupInputs.title.value;
       tasksObject.Inbox.tasks[task.globalIndex].desc = popupInputs.desc.value;
       tasksObject.Inbox.tasks[task.globalIndex].project = popupInputs.project.textContent;
       tasksObject.Inbox.tasks[task.globalIndex].priority = popupInputs.priority.getAttribute('data-priority');
+      tasksObject.Inbox.tasks[task.globalIndex].dueDate = popupInputs.dueDate.value;
 
       loopTasks();
    }
