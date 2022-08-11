@@ -1,3 +1,4 @@
+import Application from "./domFunctionality";
 import { Task, loopTasks } from "./task";
 import { tasksObject } from "./tasksObject";
 import {
@@ -5,6 +6,9 @@ import {
    popupSelections,
    popupInputs,
    addTaskInput,
+   menuProjects,
+   popupProjectSelection,
+   refreshMenuSections,
 } from "./domElements";
 
 export default class Popup {
@@ -32,15 +36,50 @@ export default class Popup {
       return container;
    }
 
-   static chooseOption(select, container) {
-      const options = container.querySelectorAll('.selection__option');
-      options.forEach(option => option.addEventListener('click', () => {
-         select.innerHTML = option.innerHTML;
-         if (select.hasAttribute('data-priority')) {
-            select.setAttribute('data-priority', option.getAttribute('data-priority'));
-         }
-         container.classList.toggle('active');
-      }));
+   static chooseOption(select, container, isNewProject) {
+      if (isNewProject) {
+         const option = container.querySelector('.selection__option:last-child');
+         option.addEventListener('click', () => {
+            select.innerHTML = option.innerHTML;
+            container.classList.toggle('active');
+         });
+      } else {
+         const options = container.querySelectorAll('.selection__option');
+         options.forEach(option => option.addEventListener('click', () => {
+            select.innerHTML = option.innerHTML;
+            if (select.hasAttribute('data-priority')) {
+               select.setAttribute('data-priority', option.getAttribute('data-priority'));
+            }
+            container.classList.toggle('active');
+         }));
+      }
+   }
+
+   static addProject(ev, value) {
+      ev.preventDefault();
+      const newProject = document.createElement('div');
+      newProject.classList.add('section');
+      newProject.innerHTML = `
+         <div class="section__icon"><img src="./images/project.svg" class="icon triangle"></div>
+         <div class="section__title">${value}</div>
+      `;
+      newProject.addEventListener('click', () => {
+         refreshMenuSections();
+         Application.activateSection(newProject);
+      });
+
+      menuProjects.appendChild(newProject);
+      tasksObject[value] = {};
+      tasksObject[value].tasksNum = 0;
+      tasksObject[value].tasks = [];
+
+      const newProjectOption = document.createElement('div');
+      newProjectOption.classList.add('selection__option');
+      newProjectOption.textContent = value;
+      popupProjectSelection.appendChild(newProjectOption);
+
+      const popupProjectSelect = popupProjectSelection.nextElementSibling;
+      newProjectOption.addEventListener('click', this.chooseOption(popupProjectSelect, popupProjectSelection, true));
    }
 
    static createTask(ev) {

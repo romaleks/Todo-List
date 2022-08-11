@@ -7,7 +7,11 @@ import {
    taskPopup,
    popupCloseBtn,
    headerTitle,
-   headerIcon,
+   addProjectSection,
+   addProjectPopup,
+   addProjectForm,
+   addProjectInput,
+   addProjectCloseBtn,
 } from "./domElements";
 import { loopTasks } from "./task";
 import Popup from "./taskPopup";
@@ -33,6 +37,16 @@ export default class Application {
       headerTitle.textContent = btn.textContent;
       loopTasks();
    }
+
+   static toggleProjectPopup() {
+      addProjectPopup.classList.toggle('active');
+      if (addProjectPopup.classList.contains('active')) {
+         addProjectForm.addEventListener('submit', (ev) => {
+            Popup.addProject(ev, addProjectInput.value);
+            addProjectInput.value = '';
+         });
+      }
+   }
    // Tasks
    static togglePopup(ev, value) {
       if (ev) {
@@ -45,6 +59,8 @@ export default class Application {
    static addEventListeners() {
       // Menu
       sectionBtns.forEach(btn => btn.addEventListener('click', () => this.activateSection(btn)));
+      addProjectSection.addEventListener('click', () => this.toggleProjectPopup());
+      addProjectCloseBtn.addEventListener('click', () => this.toggleProjectPopup());
       menuOpenCloseBtn.addEventListener('click', this.toggleMenu);
       // Tasks
       addTaskForm.addEventListener('submit', (ev) => this.togglePopup(ev, addTaskInput.value));

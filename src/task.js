@@ -51,7 +51,7 @@ export class Task {
    }
 
    deleteTask(task) {
-      tasksObject.Inbox.tasks.splice(task.index, 1);
+      tasksObject.Inbox.tasks.splice(task.initialIndex, 1);
       tasksObject[task.project].tasks.splice(task.index, 1);
       loopTasks(task.initialIndex);
    }
