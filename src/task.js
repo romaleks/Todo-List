@@ -1,6 +1,5 @@
 import Application from "./domFunctionality";
 import Popup from "./taskPopup";
-import { tasksObject } from "./tasksObject";
 import { tasksContainer, detailsTaskPopup, detailsTaskPopupBtn, detailsText } from "./domElements";
 import { format, isToday, parseISO } from "date-fns";
 import pin from './assets/pin.svg';
@@ -31,16 +30,20 @@ export class Task {
    }
 
    pinTask(task, section) {
-      const pinnedTask = tasksObject[section.textContent].tasks.splice(task.index, 1)[0];
+      const projectObj = JSON.parse(localStorage.getItem(section.textContent));
+      const pinnedTask = projectObj.tasks.splice(task.index, 1)[0]
       pinnedTask.isPinned = true;
-      tasksObject[section.textContent].tasks.unshift(pinnedTask);
+      projectObj.tasks.unshift(pinnedTask);
+      localStorage.setItem(section.textContent, JSON.stringify(projectObj));
       loopTasks();
    }
 
    unpinTask(task, section) {
-      const pinnedTask = tasksObject[section.textContent].tasks.splice(task.index, 1)[0];
+      const projectObj = JSON.parse(localStorage.getItem(section.textContent));
+      const pinnedTask = projectObj.tasks.splice(task.index, 1)[0]
       pinnedTask.isPinned = false;
-      tasksObject[section.textContent].tasks.splice(task.initialIndex, 0, pinnedTask);
+      projectObj.tasks.splice(task.initialIndex, 0, pinnedTask);
+      localStorage.setItem(section.textContent, JSON.stringify(projectObj));
       loopTasks();
    }
 
@@ -53,9 +56,22 @@ export class Task {
 
    deleteTask(task) {
       const activeSectionText = document.querySelector('.section.active').lastElementChild.textContent;
-      if (activeSectionText == 'Inbox') tasksObject.Inbox.tasks.splice(task.index, 1);
-      else tasksObject.Inbox.tasks.splice(task.initialIndex, 1);
-      tasksObject[task.project].tasks.splice(task.initialIndex, 1);
+      const projectObj = JSON.parse(localStorage.getItem(task.project));
+      const inboxObj = JSON.parse(localStorage.getItem('Inbox'))
+
+      if (activeSectionText === 'Inbox') {
+         inboxObj.tasks.splice(task.index, 1);
+         projectObj.tasks.splice(task.initialIndex, 1);
+      } else {
+         inboxObj.tasks.splice(task.initialIndex, 1);
+         projectObj.tasks.splice(task.index, 1);
+      }
+
+      if (task.project !== 'Inbox') inboxObj.tasksNum--;
+      projectObj.tasksNum--;
+
+      localStorage.setItem(task.project, JSON.stringify(projectObj));
+      localStorage.setItem('Inbox', JSON.stringify(inboxObj));
       loopTasks(task.initialIndex);
    }
 }
@@ -115,8 +131,9 @@ export function loopTasks(delIndex) {
    const activeSection = document.querySelector('.section.active').lastElementChild;
    tasksContainer.innerHTML = '';
    let index = 0;
-   if (Object.keys(tasksObject).includes(activeSection.textContent)) {
-      for (const task of tasksObject[activeSection.textContent].tasks) {
+   if (Object.keys(localStorage).includes(activeSection.textContent)) {
+      for (const el of JSON.parse(localStorage.getItem(activeSection.textContent)).tasks) {
+         const task = new Task(el.title, el.desc, el.project, el.priority, el.dueDate, el.isPinned, el.index);
          task.index = index++;
          if (delIndex !== undefined) {
             if (task.initialIndex > delIndex) task.initialIndex -= 1;

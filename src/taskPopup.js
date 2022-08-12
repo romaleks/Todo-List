@@ -1,6 +1,5 @@
 import Application from "./domFunctionality";
 import { Task, loopTasks } from "./task";
-import { tasksObject } from "./tasksObject";
 import {
    popupForm,
    popupSelections,
@@ -70,9 +69,13 @@ export default class Popup {
       });
 
       menuProjects.appendChild(newProject);
-      tasksObject[value] = {};
-      tasksObject[value].tasksNum = 0;
-      tasksObject[value].tasks = [];
+
+      const newProjectObj = {
+         tasksNum: 0,
+         tasks: []
+      }
+
+      localStorage.setItem(value, JSON.stringify(newProjectObj));
 
       const newProjectOption = document.createElement('div');
       newProjectOption.classList.add('selection__option');
@@ -101,32 +104,44 @@ export default class Popup {
          popupInputs.priority.innerHTML = '<img src="./images/priority.svg" alt="">Priority 4';
          popupInputs.priority.setAttribute('data-priority', 'p4');
          popupInputs.dueDate.value = '';
+
+         const projectObj = JSON.parse(localStorage.getItem(newTask.project));
+         const inboxObj = JSON.parse(localStorage['Inbox']);
          if (newTask.project != 'Inbox') {
             const newTask = new Task(title, desc, project, priority, dueDate, false, null);
-            newTask.initialIndex = tasksObject[newTask.project].tasksNum;
-            newTask.index = tasksObject[newTask.project].tasksNum++;
-            newTask.globalIndex = tasksObject.Inbox.tasksNum;
-            tasksObject[newTask.project].tasks.push(newTask);
+            newTask.initialIndex = projectObj.tasksNum;
+            newTask.index = projectObj.tasksNum++;
+            newTask.globalIndex = inboxObj.tasksNum;
+            projectObj.tasks.push(newTask);
+            localStorage.setItem(newTask.project, JSON.stringify(projectObj));
          }
-         newTask.initialIndex = tasksObject.Inbox.tasksNum;
-         newTask.index = tasksObject.Inbox.tasksNum++;
-         tasksObject.Inbox.tasks.push(newTask);
+         newTask.initialIndex = inboxObj.tasksNum;
+         newTask.index = inboxObj.tasksNum++;
+         inboxObj.tasks.push(newTask);
+         localStorage.setItem('Inbox', JSON.stringify(inboxObj));
          loopTasks();
       }
    }
 
    static editTask(task) {
+      const inboxObj = JSON.parse(localStorage.getItem('Inbox'));
+      const projectObj = JSON.parse(localStorage.getItem(task.project));
+
       task.title = popupInputs.title.value;
       task.desc = popupInputs.desc.value;
       task.project = popupInputs.project.textContent;
       task.priority = popupInputs.priority.getAttribute('data-priority');
       task.dueDate = popupInputs.dueDate.value;
+      projectObj.tasks[task.initialIndex] = task;
 
-      tasksObject.Inbox.tasks[task.globalIndex].title = popupInputs.title.value;
-      tasksObject.Inbox.tasks[task.globalIndex].desc = popupInputs.desc.value;
-      tasksObject.Inbox.tasks[task.globalIndex].project = popupInputs.project.textContent;
-      tasksObject.Inbox.tasks[task.globalIndex].priority = popupInputs.priority.getAttribute('data-priority');
-      tasksObject.Inbox.tasks[task.globalIndex].dueDate = popupInputs.dueDate.value;
+      inboxObj.tasks[task.globalIndex].title = popupInputs.title.value;
+      inboxObj.tasks[task.globalIndex].desc = popupInputs.desc.value;
+      inboxObj.tasks[task.globalIndex].project = popupInputs.project.textContent;
+      inboxObj.tasks[task.globalIndex].priority = popupInputs.priority.getAttribute('data-priority');
+      inboxObj.tasks[task.globalIndex].dueDate = popupInputs.dueDate.value;
+
+      localStorage.setItem('Inbox', JSON.stringify(inboxObj));
+      localStorage.setItem(task.project, JSON.stringify(projectObj));
 
       loopTasks();
    }
