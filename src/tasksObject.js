@@ -1,4 +1,4 @@
-import { Task, createTask } from './task';
+import { Task } from './task';
 import { format, endOfDay } from 'date-fns';
 
 export const tasksObject = {
