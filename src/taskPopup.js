@@ -95,7 +95,7 @@ export default class Popup {
          const project = popupInputs.project.textContent;
          const priority = popupInputs.priority.getAttribute('data-priority');
          const dueDate = popupInputs.dueDate.value;
-         const newTask = new Task(title, desc, project, priority, dueDate, false, null);
+         const newTask = new Task(title, desc, project, priority, dueDate, false, null, false);
 
          addTaskInput.value = '';
          popupInputs.title.value = '';
@@ -108,7 +108,7 @@ export default class Popup {
          const projectObj = JSON.parse(localStorage.getItem(newTask.project));
          const inboxObj = JSON.parse(localStorage['Inbox']);
          if (newTask.project != 'Inbox') {
-            const newTask = new Task(title, desc, project, priority, dueDate, false, null);
+            const newTask = new Task(title, desc, project, priority, dueDate, false, null, false);
             newTask.initialIndex = projectObj.tasksNum;
             newTask.index = projectObj.tasksNum++;
             newTask.globalIndex = inboxObj.tasksNum;

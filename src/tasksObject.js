@@ -22,9 +22,9 @@ if (!localStorage.getItem('Inbox')) {
    localStorage.setItem('📚 Homework', JSON.stringify(tasksObject['📚 Homework']));
 
    const exampleTask1 = new Task('Buy vegetables', '', '🛒 Grocery list', 'p1',
-      format(endOfDay(new Date()), 'yyyy-MM-dd'), false, 0);
+      format(endOfDay(new Date()), 'yyyy-MM-dd'), false, 0, false);
    const exampleTask2 = new Task('Buy fruits', '', '🛒 Grocery list', 'p2',
-      format(endOfDay(new Date()), 'yyyy-MM-dd'), false, 1);
+      format(endOfDay(new Date()), 'yyyy-MM-dd'), false, 1, false);
 
    const inboxObj = JSON.parse(localStorage.getItem('Inbox'));
    const groceryObj = JSON.parse(localStorage.getItem('Inbox'));

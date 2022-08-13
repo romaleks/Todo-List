@@ -6,7 +6,7 @@ import pin from './assets/pin.svg';
 import pin_active from './assets/pin-active.svg';
 
 export class Task {
-   constructor(title, desc, project, priority, dueDate, isPinned, index) {
+   constructor(title, desc, project, priority, dueDate, isPinned, index, isDone) {
       this.title = title;
       this.desc = desc;
       this.project = project;
@@ -16,10 +16,33 @@ export class Task {
       this.index = index;
       this.initialIndex = index;
       this.globalIndex = index;
+      this.isDone = isDone;
    }
 
-   strikeOutTask(btn) {
-      btn.classList.toggle('striked');
+   toggleStrikeClass(taskElement) {
+      const checkBoxBtn = taskElement.querySelector('.task__checkbox');
+      checkBoxBtn.classList.toggle('striked');
+   }
+
+   strikeOutTask(task, index) {
+      const inboxObj = JSON.parse(localStorage.getItem('Inbox'));
+      const projectObj = JSON.parse(localStorage.getItem(task.project));
+      const activeSectionText = document.querySelector('.section.active').lastElementChild.textContent;
+      let done;
+
+      if (!task.isDone) done = true;
+      else done = false;
+
+      if (activeSectionText === 'Inbox') {
+         inboxObj.tasks[task.index].isDone = done;
+         projectObj.tasks[task.initialIndex].isDone = done;
+      } else {
+         inboxObj.tasks[task.initialIndex].isDone = done;
+         projectObj.tasks[task.index].isDone = done;
+      }
+      localStorage.setItem('Inbox', JSON.stringify(inboxObj));
+      localStorage.setItem(task.project, JSON.stringify(projectObj));
+      loopTasks(null, index);
    }
 
    togglePinClass(taskElement) {
@@ -112,7 +135,7 @@ export function createTask(task, section) {
    const deleteBtn = taskElement.querySelector('#del-btn');
    pinIcon.src = pin;
 
-   checkBox.addEventListener('click', () => task.strikeOutTask(checkBox));
+   checkBox.addEventListener('click', () => task.strikeOutTask(task, task.index));
    editBtn.addEventListener('click', () => {
       Application.togglePopup();
       Popup.fillExistingInputs(task);
@@ -127,19 +150,23 @@ export function createTask(task, section) {
    return taskElement;
 }
 
-export function loopTasks(delIndex) {
+export function loopTasks(delIndex, doneIndex) {
    const activeSection = document.querySelector('.section.active').lastElementChild;
    tasksContainer.innerHTML = '';
    let index = 0;
    if (Object.keys(localStorage).includes(activeSection.textContent)) {
       for (const el of JSON.parse(localStorage.getItem(activeSection.textContent)).tasks) {
-         const task = new Task(el.title, el.desc, el.project, el.priority, el.dueDate, el.isPinned, el.index);
+         const task = new Task(el.title, el.desc, el.project, el.priority, el.dueDate, el.isPinned, el.index, el.isDone);
          task.index = index++;
          if (delIndex !== undefined) {
             if (task.initialIndex > delIndex) task.initialIndex -= 1;
          }
-         if (task.isPinned) task.togglePinClass(createTask(task, activeSection));
-         else createTask(task, activeSection);
+         const taskElem = createTask(task, activeSection);
+         if (task.isPinned) task.togglePinClass(taskElem);
+         if (task.isDone) {
+            if (task.index === doneIndex) setTimeout(() => task.toggleStrikeClass(taskElem), 0);
+            else task.toggleStrikeClass(taskElem);
+         }
       }
    }
 }
