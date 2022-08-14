@@ -1,29 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;700&display=swap');
+@import url(./themes.css);
 
-$base-color: #00a6fb;
-$inter-color: #e5e5e5;
-$hover-color: #eff8fe;
-$active-color: #dfeef8;
-$icon-active-color: #fff;
-$icon-inactive-color: #ffffff78;
-$font-color: #000;
-$font-inter-color: #757575;
-$font-striked-out-color: #aaa;
-
-$base-font: 'Manrope', sans-serif;
 // General
+.left-bar, .content { transition: background 0.3s linear; }
 ::-webkit-scrollbar {
 	width: 3px;
 }
 ::-webkit-scrollbar-thumb {
 	border-radius: 10px;
-	background: $base-color;
+	background: var(--base-color);
 }
 body {
    margin: 0;
    min-height: 100vh;
-   font-family: $base-font;
-	color: $font-color;
+	background: var(--base-color);
+   font-family: var(--base-font);
+	color: var(--font-color);
 }
 .wrapper {
 	height: 100vh;
@@ -46,15 +38,17 @@ body {
 }
 .btn {
 	&:hover {
-		background: $hover-color;
+		background: var(--hover-color);
 	}
 	&:active {
-		background: $active-color !important;
+		background: var(--active-color) !important;
 	}
 }
 input,
 textarea {
-	font-family: $base-font;
+	background: var(--base-color);
+	font-family: var(--base-font);
+	color: var(--font-color);
 }
 // Left bar
 .left-bar {
@@ -62,13 +56,14 @@ textarea {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	background: $base-color;
+	background: var(--sidebar-color);
 		&__profile {
 			width: 35px;
 			height: 35px;
-			background: $active-color;
+			background: var(--active-color);
 			border-radius: 5px;
 			margin: 0 0 2rem 0;
+			transition: background 0.3s linear;
 			cursor: pointer;
 		}
 
@@ -96,11 +91,12 @@ textarea {
 	min-width: 250px;
 	display: flex;
 	flex-direction: column;
-	border-right: 1px solid $inter-color;
-	transition: all 0.5s ease;
+	border-right: 1px solid var(--inter-color);
+	transition: background 0.3s linear, all 0.5s ease;
 	width: 42px;
 	white-space: nowrap;
 	overflow: hidden;
+	background: var(--menu-color);
 	&.inactive {
 		min-width: 0;
 		.section__title {
@@ -117,7 +113,7 @@ textarea {
 				bottom: -0.7rem;
 				width: 100%;
 				height: 1px;
-				background: $inter-color;
+				background: var(--inter-color);
 			}
 		}
 
@@ -139,12 +135,13 @@ textarea {
 	gap: 5px;
 	padding: 0.5rem;
 	border-radius: 5px;
+	transition: background 0.3s linear;
 	cursor: pointer;
 	&:hover {
-		background: $hover-color;
+		background: var(--hover-color);
 	}
 	&.active {
-		background: $active-color;
+		background: var(--active-color);
 	}
 		&__icon {
 			.triangle {
@@ -153,15 +150,19 @@ textarea {
 		}
 
 		&__title {
-			transition: all 0.3s ease;
+			transition: transform 0.3s ease;
 		}
 	.icon {
 		width: 25px;
+		&:not([data-colorful]) {
+			filter: var(--icon-active-color);
+		}
 	}
 }
 // Tasks
 .content {
 	padding: 1rem 1.5rem;
+	background: var(--base-color);
 }
 .header {
 	display: flex;
@@ -173,7 +174,7 @@ textarea {
 			transform: translateY(2px);
 			padding: 0.3rem;
 			border-radius: 5px;
-			img { filter: invert(74%) sepia(66%) saturate(6105%) hue-rotate(169deg) brightness(98%) contrast(101%); }
+			img { filter: var(--icon-base-color) }
 		}
 		&__title {
 			flex: 1;
@@ -194,7 +195,7 @@ textarea {
 		padding: 0.3rem;
 		border-radius: 5px;
 		cursor: pointer;
-		img { filter: invert(74%) sepia(66%) saturate(6105%) hue-rotate(169deg) brightness(98%) contrast(101%); }
+		img { filter: var(--icon-base-color) }
 	}
 
 	&__input {
@@ -204,15 +205,16 @@ textarea {
 			width: 100%;
 			box-sizing: border-box;
 			padding: 0.5rem 0.3rem;
-			background: $hover-color;
-			border: 2px solid $active-color;
+			background: var(--hover-color);
+			border: 2px solid var(--active-color);
 			border-radius: 5px;
 			outline: none;
 			font-size: 1.2rem;
 			font-weight: 700;
+			transition: background 0.3s linear, border 0.3s linear;;
 			&:focus {
-				background: $active-color;
-				border: 2px solid $base-color;
+				background: var(--active-color);
+				border: 2px solid var(--sidebar-color);
 			}
 			&:not(:placeholder-shown) {
 				&+label { display: none; }
@@ -220,7 +222,7 @@ textarea {
 		}
 		label {
 			position: absolute;
-			left: 0.4rem;
+			left: 0.5rem;
 			top: 50%;
 			transform: translateY(-50%);
 			cursor: inherit;
@@ -246,17 +248,17 @@ textarea {
 	align-items: center;
 	gap: 7px;
 	padding: 0.5rem;
-	border: 1px solid $inter-color;
+	border: 1px solid var(--inter-color);
 	border-radius: 5px;
 	&[data-priority="p1"] { border-left: 3px solid #e63946; }
 	&[data-priority="p2"] { border-left: 3px solid #6e44ff; }
 	&[data-priority="p3"] { border-left: 3px solid #38b000; }
 	&[data-priority="p4"] { border-left: 3px solid #aaa; }
 	&.pinned {
-		background: $hover-color;
+		background: var(--hover-color);
 	}
 	&:hover {
-		background: $hover-color;
+		background: var(--hover-color);
 	}
 		&__checkbox {
 			display: flex;
@@ -264,18 +266,17 @@ textarea {
 			align-items: center;
 			width: 20px;
 			height: 20px;
-			border: 3px solid $inter-color;
+			border: 3px solid var(--inter-color);
 			border-radius: 50%;
 			cursor: pointer;
 			span {
-				color: $base-color;
+				color: var(--base-color);
 				transform: scale(0);
 			}
-			&:active {
-				background: $active-color;
-			}
+			&:active { background: var(--active-color); }
 			&.striked {
-				border-color: $base-color;
+				filter: var(--icon-base-color);
+				&:active { background: transparent; }
 				span {
 					transition: 0.2s cubic-bezier(.16,.66,1,1.99);
 					transform: scale(1);
@@ -286,7 +287,7 @@ textarea {
 		&__title {
 			transition: 0.3s ease;
 			.task__checkbox.striked + & {
-				color: $font-striked-out-color;
+				color: var(--font-striked-out-color);
 			}
 			flex: 1;
 			span { position: relative; }
@@ -298,7 +299,7 @@ textarea {
 				transform: scaleX(0) translateY(-50%);
 				width: 100%;
 				height: 2px;
-				background: $font-striked-out-color;
+				background: var(--font-striked-out-color);
 				transition: 0.3s ease;
 			}
 			.task__checkbox.striked + & span:after {
@@ -338,7 +339,7 @@ textarea {
 	&.active {visibility: visible;}
 	&__form {
 		padding: 1.5rem 2rem 2rem;
-		background: #fff;
+		background: var(--base-color);
 		border-radius: 10px;
 		position: relative;
 		transform: scale(0);
@@ -353,7 +354,7 @@ textarea {
 		width: 25px;
 		height: 25px;
 		border-radius: 5px;
-		background: $base-color;
+		background: var(--sidebar-color);
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -392,7 +393,7 @@ textarea {
 			width: 400px;
 			outline: none;
 			font-size: 1.2rem;
-			border: 1px solid $inter-color;
+			border: 1px solid var(--inter-color);
 			border-radius: 5px;
 			max-width: 600px;
 			max-height: 500px;
@@ -402,7 +403,7 @@ textarea {
 			position: absolute;
 			left: 10px;
 			top: 12px;
-			color: $font-inter-color;
+			color: var(--font-inter-color);
 			cursor: text;
 		}
 	}
@@ -432,7 +433,7 @@ textarea {
 		justify-content: center;
 		align-items: center;
 		border-radius: 50%;
-		background: $base-color;
+		background: var(--sidebar-color);
 		border: none;
 		font-size: 3rem;
 		color: #fff;
@@ -456,14 +457,15 @@ textarea {
 		box-sizing: border-box;
 		border: none;
 		outline: none;
-		box-shadow: 0 0 10px $inter-color;
+		box-shadow: 0 0 5px var(--inter-color);
 		font-size: 1rem;
+		margin: 0 0 0.35rem 0;
 	}
 	&__selected {
 		border-radius: 5px;
 		margin: 0 0 0.5rem 0;
 		position: relative;
-		box-shadow: 0 0 10px $inter-color;
+		box-shadow: 0 0 5px var(--inter-color);
 		img {
 			width: 23px;
 			transform: translateY(1px);
@@ -490,7 +492,7 @@ textarea {
 		max-height: 0;
 		width: 100%;
 		border-radius: 5px;
-		box-shadow: 0 0 10px $inter-color;
+		box-shadow: 0 0 5px var(--inter-color);
 		transition: 0.3s ease;
 		overflow: hidden;
 		order: 1;
@@ -498,7 +500,7 @@ textarea {
 			max-height: 100px;
 			overflow-y: auto;
 			& + .selection__selected {
-				background: $hover-color;
+				background: var(--hover-color);
 			}
 			& + .selection__selected:after {
 				transform: translateY(-50%) rotateX(180deg);
@@ -514,10 +516,10 @@ textarea {
 		padding: 0.5rem;
 		cursor: pointer;
 		&:hover {
-			background: $hover-color;
+			background: var(--hover-color);
 		}
 		&:active {
-			background: $active-color;
+			background: var(--active-color);
 		}
 		img {
 			width: 23px;
@@ -534,7 +536,7 @@ textarea {
 
 	&__title {
 		font-size: 1.5rem;
-		color: $font-inter-color;
+		color: var(--font-inter-color);
 	}
 
 	&__title-text {
@@ -548,13 +550,13 @@ textarea {
 			bottom: -0.8rem;
 			width: 100%;
 			height: 2px;
-			background: $inter-color;
+			background: var(--inter-color);
 		}
 	}
 
 	&__description {
 		font-size: 1.5rem;
-		color: $font-inter-color;
+		color: var(--font-inter-color);
 	}
 
 	&__description-text {

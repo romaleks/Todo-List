@@ -2,6 +2,8 @@ export function refreshMenuSections() {
    sectionBtns = document.querySelectorAll('.section:not(.btn, .menu__sect-title)');
 }
 
+export const themeBtn = document.querySelector('#theme');
+
 export const menu = document.querySelector('.menu');
 export let sectionBtns = document.querySelectorAll('.section:not(.btn, .menu__sect-title)');
 export const menuProjects = document.querySelector('.menu__projects');

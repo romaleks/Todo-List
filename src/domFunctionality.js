@@ -12,6 +12,7 @@ import {
    addProjectForm,
    addProjectInput,
    addProjectCloseBtn,
+   themeBtn,
 } from "./domElements";
 import { loopTasks } from "./task";
 import Popup from "./taskPopup";
@@ -57,6 +58,9 @@ export default class Application {
    }
    /// Event listeners
    static addEventListeners() {
+      //Sidebar
+      const root = document.documentElement;
+      themeBtn.addEventListener('click', () => root.classList.toggle('dark'));
       // Menu
       sectionBtns.forEach(btn => btn.addEventListener('click', () => this.activateSection(btn)));
       addProjectSection.addEventListener('click', () => this.toggleProjectPopup());
