@@ -1,114 +1,132 @@
 import Application from "./domFunctionality";
 import Popup from "./taskPopup";
-import { tasksContainer, detailsTaskPopup, detailsTaskPopupBtn, detailsText } from "./domElements";
+import {
+  tasksContainer,
+  detailsTaskPopup,
+  detailsTaskPopupBtn,
+  detailsText,
+} from "./domElements";
 import { format, isToday, parseISO } from "date-fns";
-import pin from './assets/pin.svg';
-import pin_active from './assets/pin-active.svg';
+import pin from "./assets/pin.svg";
+import pin_active from "./assets/pin-active.svg";
 
 export class Task {
-   constructor(title, desc, project, priority, dueDate, isPinned, index, isDone) {
-      this.title = title;
-      this.desc = desc;
-      this.project = project;
-      this.priority = priority;
-      this.dueDate = dueDate;
-      this.isPinned = isPinned;
-      this.index = index;
-      this.initialIndex = index;
-      this.globalIndex = index;
-      this.isDone = isDone;
-   }
+  constructor(
+    title,
+    desc,
+    project,
+    priority,
+    dueDate,
+    isPinned,
+    index,
+    isDone
+  ) {
+    this.title = title;
+    this.desc = desc;
+    this.project = project;
+    this.priority = priority;
+    this.dueDate = dueDate;
+    this.isPinned = isPinned;
+    this.index = index;
+    this.initialIndex = index;
+    this.globalIndex = index;
+    this.isDone = isDone;
+  }
 
-   toggleStrikeClass(taskElement) {
-      const checkBoxBtn = taskElement.querySelector('.task__checkbox');
-      checkBoxBtn.classList.toggle('striked');
-   }
+  toggleStrikeClass(taskElement) {
+    const checkBoxBtn = taskElement.querySelector(".task__checkbox");
+    checkBoxBtn.classList.toggle("striked");
+  }
 
-   strikeOutTask(task, index) {
-      const inboxObj = JSON.parse(localStorage.getItem('Inbox'));
-      const projectObj = JSON.parse(localStorage.getItem(task.project));
-      const activeSectionText = document.querySelector('.section.active').lastElementChild.textContent;
-      let done;
+  strikeOutTask(task, index) {
+    const inboxObj = JSON.parse(localStorage.getItem("Inbox"));
+    const projectObj = JSON.parse(localStorage.getItem(task.project));
+    const activeSectionText =
+      document.querySelector(".section.active").lastElementChild.textContent;
+    let done;
 
-      if (!task.isDone) done = true;
-      else done = false;
+    if (!task.isDone) done = true;
+    else done = false;
 
-      if (activeSectionText === 'Inbox') {
-         inboxObj.tasks[task.index].isDone = done;
-         projectObj.tasks[task.initialIndex].isDone = done;
-      } else {
-         inboxObj.tasks[task.initialIndex].isDone = done;
-         projectObj.tasks[task.index].isDone = done;
-      }
-      localStorage.setItem('Inbox', JSON.stringify(inboxObj));
-      localStorage.setItem(task.project, JSON.stringify(projectObj));
-      loopTasks(null, index);
-   }
+    if (activeSectionText === "Inbox") {
+      inboxObj.tasks[task.index].isDone = done;
+      projectObj.tasks[task.initialIndex].isDone = done;
+    } else {
+      inboxObj.tasks[task.initialIndex].isDone = done;
+      projectObj.tasks[task.index].isDone = done;
+    }
+    localStorage.setItem("Inbox", JSON.stringify(inboxObj));
+    localStorage.setItem(task.project, JSON.stringify(projectObj));
+    loopTasks(null, index);
+  }
 
-   togglePinClass(taskElement) {
-      const taskIcon = taskElement.querySelector('#pin-btn img');
-      taskElement.classList.toggle('pinned');
-      if (taskElement.classList.contains('pinned')) taskIcon.src = pin_active;
-      else taskIcon.src = pin;
-   }
+  togglePinClass(taskElement) {
+    const taskIcon = taskElement.querySelector("#pin-btn img");
+    taskElement.classList.toggle("pinned");
+    if (taskElement.classList.contains("pinned")) taskIcon.src = pin_active;
+    else taskIcon.src = pin;
+  }
 
-   pinTask(task, section) {
-      const projectObj = JSON.parse(localStorage.getItem(section.textContent));
-      const pinnedTask = projectObj.tasks.splice(task.index, 1)[0]
-      pinnedTask.isPinned = true;
-      projectObj.tasks.unshift(pinnedTask);
-      localStorage.setItem(section.textContent, JSON.stringify(projectObj));
-      loopTasks();
-   }
+  pinTask(task, section) {
+    const projectObj = JSON.parse(localStorage.getItem(section.textContent));
+    const pinnedTask = projectObj.tasks.splice(task.index, 1)[0];
+    pinnedTask.isPinned = true;
+    projectObj.tasks.unshift(pinnedTask);
+    localStorage.setItem(section.textContent, JSON.stringify(projectObj));
+    loopTasks();
+  }
 
-   unpinTask(task, section) {
-      const projectObj = JSON.parse(localStorage.getItem(section.textContent));
-      const pinnedTask = projectObj.tasks.splice(task.index, 1)[0]
-      pinnedTask.isPinned = false;
-      projectObj.tasks.splice(task.initialIndex, 0, pinnedTask);
-      localStorage.setItem(section.textContent, JSON.stringify(projectObj));
-      loopTasks();
-   }
+  unpinTask(task, section) {
+    const projectObj = JSON.parse(localStorage.getItem(section.textContent));
+    const pinnedTask = projectObj.tasks.splice(task.index, 1)[0];
+    pinnedTask.isPinned = false;
+    projectObj.tasks.splice(task.initialIndex, 0, pinnedTask);
+    localStorage.setItem(section.textContent, JSON.stringify(projectObj));
+    loopTasks();
+  }
 
-   seeTaskDetails(task) {
-      detailsTaskPopup.classList.add('active');
-      detailsText.title.textContent = task.title;
-      detailsText.desc.textContent = task.desc;
-      detailsTaskPopupBtn.addEventListener('click', () => detailsTaskPopup.classList.remove('active'))
-   }
+  seeTaskDetails(task) {
+    detailsTaskPopup.classList.add("active");
+    detailsText.title.textContent = task.title;
+    detailsText.desc.textContent = task.desc;
+    detailsTaskPopupBtn.addEventListener("click", () =>
+      detailsTaskPopup.classList.remove("active")
+    );
+  }
 
-   deleteTask(task) {
-      const activeSectionText = document.querySelector('.section.active').lastElementChild.textContent;
-      const projectObj = JSON.parse(localStorage.getItem(task.project));
-      const inboxObj = JSON.parse(localStorage.getItem('Inbox'))
+  deleteTask(task) {
+    const activeSectionText =
+      document.querySelector(".section.active").lastElementChild.textContent;
+    const projectObj = JSON.parse(localStorage.getItem(task.project));
+    const inboxObj = JSON.parse(localStorage.getItem("Inbox"));
 
-      if (activeSectionText === 'Inbox') {
-         inboxObj.tasks.splice(task.index, 1);
-         projectObj.tasks.splice(task.initialIndex, 1);
-      } else {
-         inboxObj.tasks.splice(task.initialIndex, 1);
-         projectObj.tasks.splice(task.index, 1);
-      }
+    if (activeSectionText === "Inbox") {
+      inboxObj.tasks.splice(task.index, 1);
+      projectObj.tasks.splice(task.initialIndex, 1);
+    } else {
+      inboxObj.tasks.splice(task.initialIndex, 1);
+      projectObj.tasks.splice(task.index, 1);
+    }
 
-      if (task.project !== 'Inbox') inboxObj.tasksNum--;
-      projectObj.tasksNum--;
+    if (task.project !== "Inbox") inboxObj.tasksNum--;
+    projectObj.tasksNum--;
 
-      localStorage.setItem(task.project, JSON.stringify(projectObj));
-      localStorage.setItem('Inbox', JSON.stringify(inboxObj));
-      loopTasks(task.initialIndex);
-   }
+    localStorage.setItem(task.project, JSON.stringify(projectObj));
+    localStorage.setItem("Inbox", JSON.stringify(inboxObj));
+    loopTasks(task.initialIndex);
+  }
 }
 
 export function createTask(task, section) {
-   const taskElement = document.createElement('div');
-   let elementDate;
-   if (isToday(parseISO(task.dueDate))) elementDate = 'Today';
-   else if (!task.dueDate) elementDate = 'No date';
-   else elementDate = format(new Date(task.dueDate), 'd MMMM');
+  const taskElement = document.createElement("div");
+  let elementDate;
+  if (isToday(parseISO(task.dueDate))) elementDate = "Today";
+  else if (!task.dueDate) elementDate = "No date";
+  else elementDate = format(new Date(task.dueDate), "d MMMM");
 
-   taskElement.classList.add('tasks__task', 'task');
-   taskElement.setAttribute('data-priority', task.priority);
-   taskElement.innerHTML = `
+  taskElement.classList.add("tasks__task", "task");
+  taskElement.setAttribute("data-priority", task.priority);
+  taskElement.innerHTML = `
       <div class="task__checkbox"><span>✔</span></div>
       <div class="task__title"><span>${task.title}</span></div>
       <div class="task__date">${elementDate}</div>
@@ -125,48 +143,62 @@ export function createTask(task, section) {
          <img src="./images/delete.svg" alt="Delete" class="icon">
       </div>
    `;
-   tasksContainer.appendChild(taskElement);
+  tasksContainer.appendChild(taskElement);
 
-   const checkBox = taskElement.querySelector('.task__checkbox');
-   const editBtn = taskElement.querySelector('#edit-btn');
-   const pinBtn = taskElement.querySelector('#pin-btn');
-   const pinIcon = pinBtn.querySelector('img');
-   const detailsBtn = taskElement.querySelector('#details-btn');
-   const deleteBtn = taskElement.querySelector('#del-btn');
-   pinIcon.src = pin;
+  const checkBox = taskElement.querySelector(".task__checkbox");
+  const editBtn = taskElement.querySelector("#edit-btn");
+  const pinBtn = taskElement.querySelector("#pin-btn");
+  const pinIcon = pinBtn.querySelector("img");
+  const detailsBtn = taskElement.querySelector("#details-btn");
+  const deleteBtn = taskElement.querySelector("#del-btn");
+  pinIcon.src = pin;
 
-   checkBox.addEventListener('click', () => task.strikeOutTask(task, task.index));
-   editBtn.addEventListener('click', () => {
-      Application.togglePopup();
-      Popup.fillExistingInputs(task);
-   });
-   pinBtn.addEventListener('click', () => {
-      if (!task.isPinned) task.pinTask(task, section);
-      else task.unpinTask(task, section);
-   });
-   detailsBtn.addEventListener('click', () => task.seeTaskDetails(task));
-   deleteBtn.addEventListener('click', () => task.deleteTask(task));
+  checkBox.addEventListener("click", () =>
+    task.strikeOutTask(task, task.index)
+  );
+  editBtn.addEventListener("click", () => {
+    Application.togglePopup();
+    Popup.fillExistingInputs(task);
+  });
+  pinBtn.addEventListener("click", () => {
+    if (!task.isPinned) task.pinTask(task, section);
+    else task.unpinTask(task, section);
+  });
+  detailsBtn.addEventListener("click", () => task.seeTaskDetails(task));
+  deleteBtn.addEventListener("click", () => task.deleteTask(task));
 
-   return taskElement;
+  return taskElement;
 }
 
 export function loopTasks(delIndex, doneIndex) {
-   const activeSection = document.querySelector('.section.active').lastElementChild;
-   tasksContainer.innerHTML = '';
-   let index = 0;
-   if (Object.keys(localStorage).includes(activeSection.textContent)) {
-      for (const el of JSON.parse(localStorage.getItem(activeSection.textContent)).tasks) {
-         const task = new Task(el.title, el.desc, el.project, el.priority, el.dueDate, el.isPinned, el.index, el.isDone);
-         task.index = index++;
-         if (delIndex !== undefined) {
-            if (task.initialIndex > delIndex) task.initialIndex -= 1;
-         }
-         const taskElem = createTask(task, activeSection);
-         if (task.isPinned) task.togglePinClass(taskElem);
-         if (task.isDone) {
-            if (task.index === doneIndex) setTimeout(() => task.toggleStrikeClass(taskElem), 0);
-            else task.toggleStrikeClass(taskElem);
-         }
+  const activeSection =
+    document.querySelector(".section.active").lastElementChild;
+  tasksContainer.innerHTML = "";
+  let index = 0;
+  if (Object.keys(localStorage).includes(activeSection.textContent)) {
+    for (const el of JSON.parse(localStorage.getItem(activeSection.textContent))
+      .tasks) {
+      const task = new Task(
+        el.title,
+        el.desc,
+        el.project,
+        el.priority,
+        el.dueDate,
+        el.isPinned,
+        el.index,
+        el.isDone
+      );
+      task.index = index++;
+      if (delIndex !== undefined) {
+        if (task.initialIndex > delIndex) task.initialIndex -= 1;
       }
-   }
+      const taskElem = createTask(task, activeSection);
+      if (task.isPinned) task.togglePinClass(taskElem);
+      if (task.isDone) {
+        if (task.index === doneIndex)
+          setTimeout(() => task.toggleStrikeClass(taskElem), 0);
+        else task.toggleStrikeClass(taskElem);
+      }
+    }
+  }
 }

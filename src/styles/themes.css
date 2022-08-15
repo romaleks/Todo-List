@@ -1,32 +1,36 @@
 :root {
-   --base-color: #fff;
-   --menu-color: #fff;
-   --sidebar-color: #00a6fb;
-   --inter-color: #fff;
-   --inter-color: #e5e5e5;
-   --hover-color: #eff8fe;
-   --active-color: #dfeef8;
-   --icon-base-color: invert(51%) sepia(70%) saturate(2229%) hue-rotate(168deg) brightness(94%) contrast(111%);
-   --icon-active-color: invert(0%) sepia(0%) saturate(7471%) hue-rotate(254deg) brightness(114%) contrast(108%);
-   --icon-inactive-color: #ffffff78;
-   --font-color: #000;
-   --font-inter-color: #757575;
-   --font-striked-out-color: #aaa;
+  --base-color: #fff;
+  --menu-color: #fff;
+  --sidebar-color: #00a6fb;
+  --inter-color: #fff;
+  --inter-color: #e5e5e5;
+  --hover-color: #eff8fe;
+  --active-color: #dfeef8;
+  --icon-base-color: invert(51%) sepia(70%) saturate(2229%) hue-rotate(168deg)
+    brightness(94%) contrast(111%);
+  --icon-active-color: invert(0%) sepia(0%) saturate(7471%) hue-rotate(254deg)
+    brightness(114%) contrast(108%);
+  --icon-inactive-color: #ffffff78;
+  --font-color: #000;
+  --font-inter-color: #757575;
+  --font-striked-out-color: #aaa;
 
-   --base-font: 'Manrope', sans-serif;
+  --base-font: "Manrope", sans-serif;
 }
 
 :root.dark {
-   --base-color: #242426;
-   --menu-color: #313033;
-   --sidebar-color: #3d3c3f;
-   --inter-color: #706f73;
-   --hover-color: #3d3c3f;
-   --active-color: #504f53;
-   --icon-base-color: invert(100%) sepia(1%) saturate(43%) hue-rotate(13deg) brightness(117%) contrast(100%);
-   --icon-active-color: invert(100%) sepia(1%) saturate(43%) hue-rotate(13deg) brightness(117%) contrast(100%);
-   --icon-inactive-color: #ffffff78;
-   --font-color: #fff;
-   --font-inter-color: #757575;
-   --font-striked-out-color: #aaa;
+  --base-color: #242426;
+  --menu-color: #313033;
+  --sidebar-color: #3d3c3f;
+  --inter-color: #706f73;
+  --hover-color: #3d3c3f;
+  --active-color: #504f53;
+  --icon-base-color: invert(100%) sepia(1%) saturate(43%) hue-rotate(13deg)
+    brightness(117%) contrast(100%);
+  --icon-active-color: invert(100%) sepia(1%) saturate(43%) hue-rotate(13deg)
+    brightness(117%) contrast(100%);
+  --icon-inactive-color: #ffffff78;
+  --font-color: #fff;
+  --font-inter-color: #757575;
+  --font-striked-out-color: #aaa;
 }
