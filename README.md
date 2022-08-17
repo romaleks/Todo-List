@@ -28,6 +28,8 @@ This project is a part of the "The Odin Project" [curriculum](https://www.theodi
 - ES6 Modules
 - OOP Principles
 - LocalStorage API
+- JSON
+- Date-fns Library
 - Sass
 - Webpack
 - Visual Studio Code
